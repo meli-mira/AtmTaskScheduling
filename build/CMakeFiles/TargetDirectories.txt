@@ -1,0 +1,3 @@
+/home/mira/Downloads/pscd/taskScedullingService/build/CMakeFiles/TaskScheduling.dir
+/home/mira/Downloads/pscd/taskScedullingService/build/CMakeFiles/edit_cache.dir
+/home/mira/Downloads/pscd/taskScedullingService/build/CMakeFiles/rebuild_cache.dir
