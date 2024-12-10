@@ -49,6 +49,14 @@ void CNode::addNotification(CNotification *n)
 	notifications.push_back(n);
 }
 
+CTask *CNode::getTask(string task_id) const
+{
+	for (int i = 0; i < tasks.size(); i++)
+		if (tasks[i]->getID() == task_id)
+			return tasks[i];
+	return NULL;
+}
+
 int CNode::getLevel() const
 {
 	return this->level;
@@ -172,6 +180,7 @@ void CNode::print()
 	timetable->print();
 	cout << endl;
 }
+
 CNode::~CNode()
 {
 }

@@ -13,7 +13,7 @@ public:
     virtual json getTimetableByResourceId(string resource_id) = 0;
     virtual json getTimetableByNodeId(string node_id) = 0;
     virtual void deleteTimetableById(string id) = 0;
-    virtual void updateTimetableById(string id) = 0;
+    virtual void updateTimetable(const CTimetable *t) = 0;
 };
 
 class TimetableService : public ITimetableService
@@ -25,5 +25,5 @@ public:
     json getTimetableByResourceId(string resource_id) override;
     json getTimetableByNodeId(string node_id) override;
     void deleteTimetableById(string id) override;
-    void updateTimetableById(string id) override;
+    void updateTimetable(const CTimetable *t) override;
 };

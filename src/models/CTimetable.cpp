@@ -85,6 +85,23 @@ CTimetable::CTimetable(int timetable_id, time_t startDateOfCalendar, int year[36
 	this->nrDays = nrDays;
 	for (int i = 1; i <= nrDays; i++)
 		this->year[i] = year[i];
+
+	ian = 31;
+	mar = 31;
+	apr = 30;
+	may = 31;
+	iun = 30;
+	iul = 31;
+	aug = 31;
+	sep = 30;
+	oct = 31;
+	nov = 30;
+	dec = 31;
+
+	if (nrDays == 365)
+		feb = 28;
+	else
+		feb = 29;
 }
 
 void CTimetable::setOcupied(time_t startDate, time_t endDate)

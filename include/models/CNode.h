@@ -39,6 +39,7 @@ public:
 	void addTask(CTask *t);
 	void addNotification(CNotification *n);
 
+	CTask* getTask(string task_id) const;
 	int getLevel() const;
 	int getCapacity() const;
 	string getID() const;

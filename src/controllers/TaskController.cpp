@@ -1,4 +1,5 @@
 #include "../../include/controllers/TaskController.h"
+#include "../../include/models/CScheduler.h"
 
 void TaskController::getTasks(Context &ctx)
 {
@@ -99,6 +100,9 @@ void TaskController::createTask(Context &ctx)
 
         taskService->addTask(task);
 
+        /* Add task to loaded structures */
+        CScheduler::getInstance()->addTaskToNode(task->getNodeId(), task);
+
         res.result(http::status::created);
         res.body() = "{\"success\":\"Task created. Scheduler added. \"}";
         res.set(http::field::server, BOOST_BEAST_VERSION_STRING);
@@ -125,6 +129,8 @@ void TaskController::addResourceToTask(Context &ctx)
         string resource_id = json.at("resource_id").as_string().c_str();
 
         taskService->addResourceToTask(task_id, resource_id);
+        /* Add task to loaded structures */
+        CScheduler::getInstance()->addResourceToTask(task_id, resource_id);
 
         res.result(http::status::created);
         res.body() = "{\"success\":\"Resource added to task. \"}";
@@ -148,7 +154,7 @@ void TaskController::deleteTask(Context &ctx)
     {
         string task_id = ctx.getParam("id").c_str();
         taskService->deleteTaskById(task_id);
-
+        // Todo delete task from loaded structures
         res.result(http::status::no_content);
         res.set(http::field::server, BOOST_BEAST_VERSION_STRING);
     }

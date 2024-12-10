@@ -278,7 +278,7 @@ int CTask::unscheduleTask(CTimetable *nodeTimetable)
 
 void CTask::print() const
 {
-	cout << "\tTask:" << name << " " << usedResources.size() << ":";
+	cout << "\tTask:" << name << " " << duration << ":";
 	if (hasBeenPlanned == true)
 		cout << "\t" << CUtils::dateToString(startDate, "%Y-%m-%d") << "\t" << CUtils::dateToString(endDate, "%Y-%m-%d") << endl;
 

@@ -145,6 +145,29 @@ void TimetableService::deleteTimetableById(string id)
     }
 }
 
-void TimetableService::updateTimetableById(string id)
+void TimetableService::updateTimetable(const CTimetable *t)
 {
+    try
+    {
+        string sql_query = "UPDATE timetable";
+        sql_query += " SET year_mapping = ARRAY[";
+
+        vector<int> year = t->getYear();
+        sql_query += to_string(year[0]);
+        for (int i = 1; i < year.size(); i++)
+            sql_query += "," + to_string(year[i]);
+        sql_query += "],";
+
+        sql_query += " days = " + to_string(year.size()) + ",";
+        sql_query += " startdateofcalendar = '" + CUtils::dateToString(t->getStartDateOfCalendar(), "%Y-%m-%d") + "'";
+        sql_query += " WHERE timetable_id = '" + to_string(t->getID()) + "'";
+
+        connection conn = sql::database_utils::init();
+        json json_response = sql::database_utils::exec_sql(conn, sql::UPDATE, sql_query);
+        sql::database_utils::db_close(conn);
+    }
+    catch (sql::database_exception &e)
+    {
+        std::cerr << e.what() << '\n';
+    }
 }

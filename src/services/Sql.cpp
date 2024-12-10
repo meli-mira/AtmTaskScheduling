@@ -50,12 +50,12 @@ namespace sql
         connection c("dbname = " + DATABASE_NAME + " user = " + DATABASE_USER + " password = " + DATABASE_USER_PASS + " hostaddr = " + HOST_ADDRESS + " port = " + HOST_PORT);
         if (c.is_open())
         {
-            CLogger::log(LOGGER_SRC, "database_connect", "Connecting to database " + DATABASE_NAME + " with success!");
+           // CLogger::log(LOGGER_SRC, "database_connect", "Connecting to database " + DATABASE_NAME + " with success!");
             return c;
         }
         else
         {
-            CLogger::log(LOGGER_SRC, "database_connect", "Connecting to database" + DATABASE_NAME + "failed!");
+            //CLogger::log(LOGGER_SRC, "database_connect", "Connecting to database" + DATABASE_NAME + "failed!");
             throw database_exception("Connection failed!");
         }
     }

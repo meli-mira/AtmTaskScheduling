@@ -1,5 +1,6 @@
 #include "../../include/controllers/ResourceController.hpp"
 #include "../../include/services/TimetableService.hpp"
+#include "../../include/models/CScheduler.h"
 
 void ResourceController::getResources(Context &ctx)
 {
@@ -80,6 +81,7 @@ void ResourceController::createResource(Context &ctx)
         timetableService->addTimetable(resource->getTimetable());
 
         resourceService->addResource(resource);
+        CScheduler::getInstance()->addResource(resource);
 
         res.result(http::status::created);
         res.body() = "{\"success\":\"Resource created. Timetable added. \"}";
@@ -104,6 +106,7 @@ void ResourceController::deleteResource(Context &ctx)
         string resource_id = ctx.getParam("id").c_str();
         resourceService->deleteResourceById(resource_id);
 
+        // TODO DELETE RESOURCE
         res.result(http::status::no_content);
         res.set(http::field::server, BOOST_BEAST_VERSION_STRING);
     }

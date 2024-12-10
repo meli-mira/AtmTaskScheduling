@@ -82,7 +82,8 @@ void NodeController::createNode(Context &ctx)
         timetableService->addTimetable(node->getTimetable());
 
         nodeService->addNode(node);
-        //CScheduler::getInstance().
+        CScheduler::getInstance()->addNode(node);
+
         res.result(http::status::created);
         res.body() = "{\"success\":\"Node created. Timetable added. \"}";
         res.set(http::field::server, BOOST_BEAST_VERSION_STRING);

@@ -15,9 +15,9 @@ CTask *TaskSerializer::fromJson(const boost::json::object &obj)
     CTask *t;
 
     if (taskType == "INTERVAL_BASED")
-        t = new CTask(priority, name, description, CUtils::parseDateTime(request.c_str(), "%Y-%m-%d"), CUtils::parseDateTime(request.c_str(), "%Y-%m-%d"), duration, INTERVAL_BASED, node_id);
+        t = new CTask(priority, name, description, CUtils::parseDateTime(request.c_str(), "%Y-%m-%d"), CUtils::parseDateTime(deadline.c_str(), "%Y-%m-%d"), duration, INTERVAL_BASED, node_id);
     else
-        t = new CTask(priority, name, description, CUtils::parseDateTime(request.c_str(), "%Y-%m-%d"), CUtils::parseDateTime(request.c_str(), "%Y-%m-%d"), duration, FIXED, node_id);
+        t = new CTask(priority, name, description, CUtils::parseDateTime(request.c_str(), "%Y-%m-%d"), CUtils::parseDateTime(deadline.c_str(), "%Y-%m-%d"), duration, FIXED, node_id);
 
     // check if is a new request or not
     if (obj.if_contains("task_id"))

@@ -90,11 +90,20 @@ int main(int argc, char *argv[])
 		router->addRoute(DELETE, "/node/{id}", [nodeController](auto &ctx)
 						 { nodeController->deleteNode(ctx); });
 
+		// Routes for scheduling
+		auto schedulerService = std::make_shared<SchedulerService>();
+		auto schedulerController = std::make_shared<SchedulerController>(schedulerService);
+		router->addRoute(POST, "/schedule/{node_id}", [schedulerController](auto &ctx)
+						 { schedulerController->scheduleNode(ctx); });
+		router->addRoute(POST, "/schedule-all/{node-id}", [schedulerController](auto &ctx)
+						 { schedulerController->scheduleAllNodesFrom(ctx); });
+
 		std::cout << "Starting server on port " << server.getPort() << endl;
 
 		// start the scheduler instance
 		CScheduler::getInstance()->init();
-		//CScheduler::getInstance()->printAll();
+
+		// CScheduler::getInstance()->printAll();
 
 		server.run();
 

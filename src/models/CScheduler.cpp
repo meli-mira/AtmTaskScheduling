@@ -92,8 +92,9 @@ void CScheduler::init()
 	}
 }
 
-void CScheduler::scheduleAll()
+void CScheduler::scheduleAll(CNode *n)
 {
+	// todo
 }
 
 void CScheduler::scheduleTasksForNode(CNode *n)
@@ -204,15 +205,62 @@ void CScheduler::printAll()
 
 void CScheduler::addNode(CNode *n)
 {
+	nodes.push_back(n);
 }
+
 void CScheduler::addResource(CResource *r)
 {
+	resources.push_back(r);
 }
+
 void CScheduler::addTaskToNode(string node_id, CTask *t)
 {
+	CNode *n = searchNode(node_id);
+	if (n != NULL)
+		n->addTask(t);
 }
-void CScheduler::addResourceToTask(string task_id, CResource *r)
+
+void CScheduler::addResourceToTask(string task_id, string resource_id)
 {
+	CTask *t = NULL;
+	CResource *r = searchResource(resource_id);
+	if (r != NULL)
+	{
+		for (int i = 0; i < nodes.size(); i++)
+		{
+			t = nodes[i]->getTask(task_id);
+			if (t != NULL)
+			{
+				t->addResource(r);
+				break;
+			}
+		}
+	}
+}
+
+void CScheduler::updateSchedulingStructures(CNode *n)
+{
+	auto timetableService = std::make_shared<TimetableService>();
+	auto schedulerService = std::make_shared<SchedulerService>();
+	/* Update the timetable of the node */
+	timetableService->updateTimetable(n->getTimetable());
+
+	vector<CTask *> tasks = n->getTasks();
+	for (int i = 0; i < tasks.size(); i++)
+	{
+		if (tasks[i]->getHasBeenPlanned() == true)
+		{
+			/* Update timetables of resources used by the planned task */
+			vector<CResource *> resources = tasks[i]->getResources();
+			for (int j = 0; j < resources.size(); j++)
+				timetableService->updateTimetable(resources[j]->getTimetable());
+
+			schedulerService->updateScheduler(n->getID(), tasks[i]->getID(), CUtils::dateToString(tasks[i]->getStartDate(), "%Y-%m-%d"), CUtils::dateToString(tasks[i]->getEndDate(), "%Y-%m-%d"));
+
+			// set hasbeenplanned true
+			// is has issues ,add notifications
+		}
+	}
 }
 
 CNode *CScheduler::searchNode(string id)

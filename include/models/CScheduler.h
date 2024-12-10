@@ -7,6 +7,7 @@
 #include "../services/TaskService.h"
 #include "../services/ResourceService.hpp"
 #include "../services/TimetableService.hpp"
+#include "../services/SchedulerService.hpp"
 #include "../serializers/ResourceSerializer.hpp"
 #include "../serializers/NodeSerializer.hpp"
 #include "../serializers/TaskSerializer.hpp"
@@ -31,7 +32,7 @@ public:
 
 	void init();
 
-	void scheduleAll();
+	void scheduleAll(CNode *n);
 	void scheduleTasksForNode(CNode *n);
 
 	void printScheduledTasks(CNode *n);
@@ -43,11 +44,13 @@ public:
 
 	void printAll();
 
-	void addNode(CNode*n);
-	void addResource(CResource*r);
-	void addTaskToNode(string node_id, CTask*t);
-	void addResourceToTask(string task_id, CResource *r);
-	
+	void addNode(CNode *n);
+	void addResource(CResource *r);
+	void addTaskToNode(string node_id, CTask *t);
+	void addResourceToTask(string task_id, string resource_id);
+
+	void updateSchedulingStructures(CNode *n);
+
 	CNode *searchNode(string id);
 	CResource *searchResource(string id);
 

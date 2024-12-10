@@ -1781,6 +1781,12 @@ CMakeFiles/TaskScheduling.dir/src/controllers/NodeController.cpp.o: /home/mira/D
   /home/mira/Downloads/pscd/taskScedullingService/include/services/Sql.h \
   /home/mira/Downloads/pscd/taskScedullingService/include/services/NodeService.hpp \
   /home/mira/Downloads/pscd/taskScedullingService/include/controllers/NodeController.hpp \
+  /home/mira/Downloads/pscd/taskScedullingService/include/serializers/ResourceSerializer.hpp \
+  /home/mira/Downloads/pscd/taskScedullingService/include/serializers/TaskSerializer.hpp \
+  /home/mira/Downloads/pscd/taskScedullingService/include/services/ResourceService.hpp \
+  /home/mira/Downloads/pscd/taskScedullingService/include/services/SchedulerService.hpp \
+  /home/mira/Downloads/pscd/taskScedullingService/include/services/TaskService.h \
+  /home/mira/Downloads/pscd/taskScedullingService/include/models/CScheduler.h \
   /home/mira/Downloads/pscd/taskScedullingService/include/serializers/TimetableSerializer.hpp \
   /home/mira/Downloads/pscd/taskScedullingService/include/services/TimetableService.hpp \
   /usr/include/alloca.h \
@@ -3898,6 +3904,15 @@ CMakeFiles/TaskScheduling.dir/src/controllers/ResourceController.cpp.o: /home/mi
   /home/mira/Downloads/pscd/taskScedullingService/include/services/Sql.h \
   /home/mira/Downloads/pscd/taskScedullingService/include/services/ResourceService.hpp \
   /home/mira/Downloads/pscd/taskScedullingService/include/controllers/ResourceController.hpp \
+  /home/mira/Downloads/pscd/taskScedullingService/include/serializers/NodeSerializer.hpp \
+  /home/mira/Downloads/pscd/taskScedullingService/include/serializers/TaskSerializer.hpp \
+  /home/mira/Downloads/pscd/taskScedullingService/include/models/CNode.h \
+  /home/mira/Downloads/pscd/taskScedullingService/include/services/NodeService.hpp \
+  /home/mira/Downloads/pscd/taskScedullingService/include/services/SchedulerService.hpp \
+  /home/mira/Downloads/pscd/taskScedullingService/include/services/TaskService.h \
+  /home/mira/Downloads/pscd/taskScedullingService/include/models/CNotification.h \
+  /home/mira/Downloads/pscd/taskScedullingService/include/models/CScheduler.h \
+  /home/mira/Downloads/pscd/taskScedullingService/include/models/CTask.h \
   /home/mira/Downloads/pscd/taskScedullingService/include/serializers/TimetableSerializer.hpp \
   /home/mira/Downloads/pscd/taskScedullingService/include/services/TimetableService.hpp \
   /usr/include/alloca.h \
@@ -8136,6 +8151,16 @@ CMakeFiles/TaskScheduling.dir/src/controllers/TaskController.cpp.o: /home/mira/D
   /home/mira/Downloads/pscd/taskScedullingService/include/services/Sql.h \
   /home/mira/Downloads/pscd/taskScedullingService/include/services/TaskService.h \
   /home/mira/Downloads/pscd/taskScedullingService/include/controllers/TaskController.h \
+  /home/mira/Downloads/pscd/taskScedullingService/include/serializers/NodeSerializer.hpp \
+  /home/mira/Downloads/pscd/taskScedullingService/include/serializers/ResourceSerializer.hpp \
+  /home/mira/Downloads/pscd/taskScedullingService/include/models/CNode.h \
+  /home/mira/Downloads/pscd/taskScedullingService/include/serializers/TimetableSerializer.hpp \
+  /home/mira/Downloads/pscd/taskScedullingService/include/services/NodeService.hpp \
+  /home/mira/Downloads/pscd/taskScedullingService/include/services/ResourceService.hpp \
+  /home/mira/Downloads/pscd/taskScedullingService/include/services/SchedulerService.hpp \
+  /home/mira/Downloads/pscd/taskScedullingService/include/services/TimetableService.hpp \
+  /home/mira/Downloads/pscd/taskScedullingService/include/models/CNotification.h \
+  /home/mira/Downloads/pscd/taskScedullingService/include/models/CScheduler.h \
   /usr/include/alloca.h \
   /usr/include/arpa/inet.h \
   /usr/include/asm-generic/bitsperlong.h \
@@ -12351,7 +12376,6 @@ CMakeFiles/TaskScheduling.dir/src/controllers/TimetableController.cpp.o: /home/m
 
 CMakeFiles/TaskScheduling.dir/src/main.cpp.o: /home/mira/Downloads/pscd/taskScedullingService/src/main.cpp \
   /home/mira/Downloads/pscd/taskScedullingService/include/context.hpp \
-  /home/mira/Downloads/pscd/taskScedullingService/include/services/SchedulerService.hpp \
   /home/mira/Downloads/pscd/taskScedullingService/include/controllers/NodeController.hpp \
   /home/mira/Downloads/pscd/taskScedullingService/include/controllers/ResourceController.hpp \
   /home/mira/Downloads/pscd/taskScedullingService/include/controllers/SchedulerController.hpp \
@@ -12367,6 +12391,7 @@ CMakeFiles/TaskScheduling.dir/src/main.cpp.o: /home/mira/Downloads/pscd/taskSced
   /home/mira/Downloads/pscd/taskScedullingService/include/services/Sql.h \
   /home/mira/Downloads/pscd/taskScedullingService/include/services/NodeService.hpp \
   /home/mira/Downloads/pscd/taskScedullingService/include/services/ResourceService.hpp \
+  /home/mira/Downloads/pscd/taskScedullingService/include/services/SchedulerService.hpp \
   /home/mira/Downloads/pscd/taskScedullingService/include/services/TaskService.h \
   /home/mira/Downloads/pscd/taskScedullingService/include/services/TimetableService.hpp \
   /home/mira/Downloads/pscd/taskScedullingService/include/models/CNotification.h \
@@ -15413,6 +15438,7 @@ CMakeFiles/TaskScheduling.dir/src/models/CScheduler.cpp.o: /home/mira/Downloads/
   /home/mira/Downloads/pscd/taskScedullingService/include/services/Sql.h \
   /home/mira/Downloads/pscd/taskScedullingService/include/services/NodeService.hpp \
   /home/mira/Downloads/pscd/taskScedullingService/include/services/ResourceService.hpp \
+  /home/mira/Downloads/pscd/taskScedullingService/include/services/SchedulerService.hpp \
   /home/mira/Downloads/pscd/taskScedullingService/include/services/TaskService.h \
   /home/mira/Downloads/pscd/taskScedullingService/include/services/TimetableService.hpp \
   /home/mira/Downloads/pscd/taskScedullingService/include/models/CNotification.h \
@@ -17042,6 +17068,7 @@ CMakeFiles/TaskScheduling.dir/src/models/CTask.cpp.o: /home/mira/Downloads/pscd/
   /home/mira/Downloads/pscd/taskScedullingService/include/services/Sql.h \
   /home/mira/Downloads/pscd/taskScedullingService/include/services/NodeService.hpp \
   /home/mira/Downloads/pscd/taskScedullingService/include/services/ResourceService.hpp \
+  /home/mira/Downloads/pscd/taskScedullingService/include/services/SchedulerService.hpp \
   /home/mira/Downloads/pscd/taskScedullingService/include/services/TaskService.h \
   /home/mira/Downloads/pscd/taskScedullingService/include/services/TimetableService.hpp \
   /home/mira/Downloads/pscd/taskScedullingService/include/models/CNotification.h \
@@ -35048,12 +35075,6 @@ CMakeFiles/TaskScheduling.dir/src/services/TimetableService.cpp.o: /home/mira/Do
 
 /home/mira/Downloads/pscd/taskScedullingService/include/controllers/SchedulerController.hpp:
 
-/home/mira/Downloads/pscd/taskScedullingService/include/services/SchedulerService.hpp:
-
-/home/mira/Downloads/pscd/taskScedullingService/include/models/CScheduler.h:
-
-/home/mira/Downloads/pscd/taskScedullingService/include/serializers/TaskSerializer.hpp:
-
 /home/mira/Downloads/pscd/taskScedullingService/src/controllers/NotificationController.cpp:
 
 /usr/include/x86_64-linux-gnu/bits/termios-misc.h:
@@ -35540,10 +35561,6 @@ CMakeFiles/TaskScheduling.dir/src/services/TimetableService.cpp.o: /home/mira/Do
 
 /usr/include/boost/asio/generic/detail/endpoint.hpp:
 
-/home/mira/Downloads/pscd/taskScedullingService/include/services/TaskService.h:
-
-/usr/include/boost/asio/generic/basic_endpoint.hpp:
-
 /usr/include/boost/asio/dispatch.hpp:
 
 /usr/include/boost/asio/detail/strand_service.hpp:
@@ -35611,6 +35628,16 @@ CMakeFiles/TaskScheduling.dir/src/services/TimetableService.cpp.o: /home/mira/Do
 /usr/include/boost/asio/append.hpp:
 
 /usr/include/boost/asio/any_completion_executor.hpp:
+
+/home/mira/Downloads/pscd/taskScedullingService/include/models/CScheduler.h:
+
+/usr/include/boost/asio/generic/basic_endpoint.hpp:
+
+/home/mira/Downloads/pscd/taskScedullingService/include/services/TaskService.h:
+
+/home/mira/Downloads/pscd/taskScedullingService/include/services/SchedulerService.hpp:
+
+/home/mira/Downloads/pscd/taskScedullingService/include/serializers/TaskSerializer.hpp:
 
 /home/mira/Downloads/pscd/taskScedullingService/include/services/Sql.h:
 
@@ -38406,9 +38433,9 @@ CMakeFiles/TaskScheduling.dir/src/services/TimetableService.cpp.o: /home/mira/Do
 
 /usr/include/boost/beast/http/impl/read.hpp:
 
-/home/mira/Downloads/pscd/taskScedullingService/include/serializers/ResourceSerializer.hpp:
-
 /usr/include/boost/asio/bind_cancellation_slot.hpp:
+
+/home/mira/Downloads/pscd/taskScedullingService/include/serializers/ResourceSerializer.hpp:
 
 /usr/include/boost/beast/websocket/detail/type_traits.hpp:
 
