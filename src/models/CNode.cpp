@@ -44,9 +44,17 @@ void CNode::addTask(CTask *t)
 	tasks.push_back(t);
 }
 
-void CNode::addNotification(CNotification *n)
+bool CNode::deleteTask(string task_id)
 {
-	notifications.push_back(n);
+	for (int i = 0; i < tasks.size(); i++)
+	{
+		if (tasks[i]->getID() == task_id)
+		{
+			tasks.erase(tasks.begin() + i);
+			return true;
+		}
+	}
+	return false;
 }
 
 CTask *CNode::getTask(string task_id) const
@@ -55,6 +63,27 @@ CTask *CNode::getTask(string task_id) const
 		if (tasks[i]->getID() == task_id)
 			return tasks[i];
 	return NULL;
+}
+
+vector<CTask *> CNode::getTasks() const
+{
+	return tasks;
+}
+
+vector<CTask *> CNode::getTasksBetween(time_t startDate, time_t endDate) const
+{
+	vector<CTask *> v;
+	if (timetable->getNrOfJobsBetween(startDate, endDate) >= 1)
+	{
+		for (int i = 0; i < tasks.size(); i++)
+		{
+			// There are no intersections if plannedTaskEndDate < startDate or plannedTaskStartDate > endDate
+			if (tasks[i]->getHasBeenPlanned() && (CUtils::compareDates(tasks[i]->getEndDate(), startDate) == true || CUtils::compareDates(tasks[i]->getStartDate(), endDate) == true))
+
+				v.push_back(tasks[i]);
+		}
+	}
+	return v;
 }
 
 int CNode::getLevel() const
@@ -122,30 +151,6 @@ void CNode::setID(int last_id)
 	id = ++last_id;
 }
 
-void CNode::readTasksFromFile(string filename)
-{
-	ifstream f(filename);
-	string taskName, taskDescription, taskStartNoEarlienThan, taskDeadline, type, resourceFile;
-	int taskDuration, taskPriority;
-	CTask *t;
-
-	while (f >> taskName >> taskPriority >> taskDescription >> type >> taskStartNoEarlienThan >> taskDeadline >> taskDuration >> resourceFile)
-	{
-		if (type == "I")
-			t = new CTask(taskPriority, taskName, taskDescription, CUtils::parseDateTime(taskStartNoEarlienThan.c_str(), "%Y-%m-%d"), CUtils::parseDateTime(taskDeadline.c_str(), "%Y-%m-%d"), taskDuration, INTERVAL_BASED, resourceFile, node_id);
-		else
-			t = new CTask(taskPriority, taskName, taskDescription, CUtils::parseDateTime(taskStartNoEarlienThan.c_str(), "%Y-%m-%d"), CUtils::parseDateTime(taskDeadline.c_str(), "%Y-%m-%d"), taskDuration, FIXED, resourceFile, node_id);
-		tasks.push_back(t);
-	}
-
-	f.close();
-}
-
-vector<CTask *> CNode::getTasks() const
-{
-	return tasks;
-}
-
 void CNode::sortTasksByDeadline()
 {
 	for (int i = 0; i < tasks.size() - 1; i++)
@@ -164,11 +169,13 @@ void CNode::sortTasksByDeadline()
 
 void CNode::scheduleTasks()
 {
-	time_t startDate = time(0), endDate;
 	sortTasksByDeadline();
 
 	for (int i = 0; i < tasks.size(); i++)
-		tasks[i]->scheduleTask(timetable, capacity);
+	{
+		if (tasks[i]->getHasBeenPlanned() == false)
+			tasks[i]->scheduleTask(timetable, capacity);
+	}
 }
 
 void CNode::print()

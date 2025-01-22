@@ -11,10 +11,7 @@ void TimetableService::init()
         sql::database_utils::db_close(conn);
 
         if (json_response.size() == 1)
-        {
-            string last_id = to_string(json_response[0].at("timetable_id"));
-            CTimetable::setID(std::stoi(last_id.substr(1, last_id.size() - 1)));
-        }
+            CTimetable::setID(stoi(json_response[0]["timetable_id"].get<std::string>()));
         else
             CTimetable::setID(0);
     }
@@ -55,9 +52,6 @@ void TimetableService::addTimetable(const CTimetable *t)
     {
         std::cerr << e.what() << '\n';
     }
-
-    // todo
-    // add timetable if necessary trigger
 }
 
 json TimetableService::getTimetableById(string id)
@@ -92,7 +86,6 @@ json TimetableService::getTimetableByResourceId(string resource_id)
         sql_query += " WHERE resources.resource_id = '" + resource_id + "'";
 
     std:
-        cerr << sql_query;
         connection conn = sql::database_utils::init();
         json_response = sql::database_utils::exec_sql(conn, sql::SELECT, sql_query);
         sql::database_utils::db_close(conn);

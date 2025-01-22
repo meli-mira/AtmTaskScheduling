@@ -8,6 +8,7 @@
 #include "../include/controllers/TimetableController.hpp"
 #include "../include/controllers/NodeController.hpp"
 #include "../include/controllers/SchedulerController.hpp"
+#include "../include/controllers/NotificationController.hpp"
 
 int main(int argc, char *argv[])
 {
@@ -41,6 +42,8 @@ int main(int argc, char *argv[])
 						 { taskController->getResourcesOfTask(ctx); });
 		router->addRoute(POST, "/task", [taskController](auto &ctx)
 						 { taskController->createTask(ctx); });
+		router->addRoute(PUT, "/task", [taskController](auto &ctx)
+						 { taskController->updateTask(ctx); });
 		router->addRoute(POST, "/resources-task", [taskController](auto &ctx)
 						 { taskController->addResourceToTask(ctx); });
 		router->addRoute(DELETE, "/task/{id}", [taskController](auto &ctx)
@@ -97,6 +100,19 @@ int main(int argc, char *argv[])
 						 { schedulerController->scheduleNode(ctx); });
 		router->addRoute(POST, "/schedule-all/{node-id}", [schedulerController](auto &ctx)
 						 { schedulerController->scheduleAllNodesFrom(ctx); });
+
+		// Routes for notifications
+		auto notificationService = std::make_shared<NotificationService>();
+		notificationService->init();
+		auto notificationController = std::make_shared<NotificationController>(notificationService);
+		router->addRoute(GET, "/notification/{notification_id}", [notificationController](auto &ctx)
+						 { notificationController->getNotificationById(ctx); });
+		router->addRoute(GET, "/notifications-node/{node_id}", [notificationController](auto &ctx)
+						 { notificationController->getNotificationsByNodeId(ctx); });
+		router->addRoute(GET, "/notifications-task/{task_id}", [notificationController](auto &ctx)
+						 { notificationController->getNotificationsByTaskId(ctx); });
+		router->addRoute(DELETE, "/notification/{id}", [notificationController](auto &ctx)
+						 { notificationController->deleteNotification(ctx); });
 
 		std::cout << "Starting server on port " << server.getPort() << endl;
 

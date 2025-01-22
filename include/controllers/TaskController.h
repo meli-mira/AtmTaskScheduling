@@ -27,4 +27,5 @@ public:
     void createTask(Context &ctx);
     void addResourceToTask(Context &ctx);
     void deleteTask(Context &ctx);
+    void updateTask(Context &ctx);
 };

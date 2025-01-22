@@ -4,7 +4,6 @@
 #include <vector>
 #include <fstream>
 #include "CTask.h"
-#include "CNotification.h"
 #include "CTimetable.h"
 
 using namespace std;
@@ -23,7 +22,6 @@ private:
 	CNode *parentNode;
 	vector<CNode *> childNodes;
 	vector<CTask *> tasks;
-	vector<CNotification *> notifications;
 
 	int level;
 
@@ -37,9 +35,12 @@ public:
 	void addChildrenNode(CNode *node);
 
 	void addTask(CTask *t);
-	void addNotification(CNotification *n);
+	bool deleteTask(string task_id);
 
-	CTask* getTask(string task_id) const;
+	CTask *getTask(string task_id) const;
+	vector<CTask *> getTasks() const;
+	vector<CTask *> getTasksBetween(time_t startDate, time_t endDate) const;
+
 	int getLevel() const;
 	int getCapacity() const;
 	string getID() const;
@@ -53,10 +54,6 @@ public:
 	CNode *getParentNode() const;
 	void setTimetable(CTimetable *t);
 	static void setID(int last_id);
-
-	void readTasksFromFile(string filename);
-
-	vector<CTask *> getTasks() const;
 
 	void sortTasksByDeadline();
 

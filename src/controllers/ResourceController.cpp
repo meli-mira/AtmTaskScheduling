@@ -106,7 +106,10 @@ void ResourceController::deleteResource(Context &ctx)
         string resource_id = ctx.getParam("id").c_str();
         resourceService->deleteResourceById(resource_id);
 
-        // TODO DELETE RESOURCE
+        // Delete from existing loaded list of tasks from Scheduling
+        CScheduler::getInstance()->deleteResourceFromTasks(resource_id);
+        CScheduler::getInstance()->deleteResource(resource_id);
+
         res.result(http::status::no_content);
         res.set(http::field::server, BOOST_BEAST_VERSION_STRING);
     }

@@ -223,10 +223,24 @@ CMakeFiles/TaskScheduling.dir/src/models/CNotification.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/TaskScheduling.dir/src/models/CNotification.cpp.s"
 	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/mira/Downloads/pscd/taskScedullingService/src/models/CNotification.cpp -o CMakeFiles/TaskScheduling.dir/src/models/CNotification.cpp.s
 
+CMakeFiles/TaskScheduling.dir/src/models/CNotificationGenerator.cpp.o: CMakeFiles/TaskScheduling.dir/flags.make
+CMakeFiles/TaskScheduling.dir/src/models/CNotificationGenerator.cpp.o: /home/mira/Downloads/pscd/taskScedullingService/src/models/CNotificationGenerator.cpp
+CMakeFiles/TaskScheduling.dir/src/models/CNotificationGenerator.cpp.o: CMakeFiles/TaskScheduling.dir/compiler_depend.ts
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/mira/Downloads/pscd/taskScedullingService/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_12) "Building CXX object CMakeFiles/TaskScheduling.dir/src/models/CNotificationGenerator.cpp.o"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/TaskScheduling.dir/src/models/CNotificationGenerator.cpp.o -MF CMakeFiles/TaskScheduling.dir/src/models/CNotificationGenerator.cpp.o.d -o CMakeFiles/TaskScheduling.dir/src/models/CNotificationGenerator.cpp.o -c /home/mira/Downloads/pscd/taskScedullingService/src/models/CNotificationGenerator.cpp
+
+CMakeFiles/TaskScheduling.dir/src/models/CNotificationGenerator.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing CXX source to CMakeFiles/TaskScheduling.dir/src/models/CNotificationGenerator.cpp.i"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/mira/Downloads/pscd/taskScedullingService/src/models/CNotificationGenerator.cpp > CMakeFiles/TaskScheduling.dir/src/models/CNotificationGenerator.cpp.i
+
+CMakeFiles/TaskScheduling.dir/src/models/CNotificationGenerator.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/TaskScheduling.dir/src/models/CNotificationGenerator.cpp.s"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/mira/Downloads/pscd/taskScedullingService/src/models/CNotificationGenerator.cpp -o CMakeFiles/TaskScheduling.dir/src/models/CNotificationGenerator.cpp.s
+
 CMakeFiles/TaskScheduling.dir/src/models/CResource.cpp.o: CMakeFiles/TaskScheduling.dir/flags.make
 CMakeFiles/TaskScheduling.dir/src/models/CResource.cpp.o: /home/mira/Downloads/pscd/taskScedullingService/src/models/CResource.cpp
 CMakeFiles/TaskScheduling.dir/src/models/CResource.cpp.o: CMakeFiles/TaskScheduling.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/mira/Downloads/pscd/taskScedullingService/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_12) "Building CXX object CMakeFiles/TaskScheduling.dir/src/models/CResource.cpp.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/mira/Downloads/pscd/taskScedullingService/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_13) "Building CXX object CMakeFiles/TaskScheduling.dir/src/models/CResource.cpp.o"
 	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/TaskScheduling.dir/src/models/CResource.cpp.o -MF CMakeFiles/TaskScheduling.dir/src/models/CResource.cpp.o.d -o CMakeFiles/TaskScheduling.dir/src/models/CResource.cpp.o -c /home/mira/Downloads/pscd/taskScedullingService/src/models/CResource.cpp
 
 CMakeFiles/TaskScheduling.dir/src/models/CResource.cpp.i: cmake_force
@@ -240,7 +254,7 @@ CMakeFiles/TaskScheduling.dir/src/models/CResource.cpp.s: cmake_force
 CMakeFiles/TaskScheduling.dir/src/models/CScheduler.cpp.o: CMakeFiles/TaskScheduling.dir/flags.make
 CMakeFiles/TaskScheduling.dir/src/models/CScheduler.cpp.o: /home/mira/Downloads/pscd/taskScedullingService/src/models/CScheduler.cpp
 CMakeFiles/TaskScheduling.dir/src/models/CScheduler.cpp.o: CMakeFiles/TaskScheduling.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/mira/Downloads/pscd/taskScedullingService/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_13) "Building CXX object CMakeFiles/TaskScheduling.dir/src/models/CScheduler.cpp.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/mira/Downloads/pscd/taskScedullingService/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_14) "Building CXX object CMakeFiles/TaskScheduling.dir/src/models/CScheduler.cpp.o"
 	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/TaskScheduling.dir/src/models/CScheduler.cpp.o -MF CMakeFiles/TaskScheduling.dir/src/models/CScheduler.cpp.o.d -o CMakeFiles/TaskScheduling.dir/src/models/CScheduler.cpp.o -c /home/mira/Downloads/pscd/taskScedullingService/src/models/CScheduler.cpp
 
 CMakeFiles/TaskScheduling.dir/src/models/CScheduler.cpp.i: cmake_force
@@ -254,7 +268,7 @@ CMakeFiles/TaskScheduling.dir/src/models/CScheduler.cpp.s: cmake_force
 CMakeFiles/TaskScheduling.dir/src/models/CTask.cpp.o: CMakeFiles/TaskScheduling.dir/flags.make
 CMakeFiles/TaskScheduling.dir/src/models/CTask.cpp.o: /home/mira/Downloads/pscd/taskScedullingService/src/models/CTask.cpp
 CMakeFiles/TaskScheduling.dir/src/models/CTask.cpp.o: CMakeFiles/TaskScheduling.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/mira/Downloads/pscd/taskScedullingService/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_14) "Building CXX object CMakeFiles/TaskScheduling.dir/src/models/CTask.cpp.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/mira/Downloads/pscd/taskScedullingService/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_15) "Building CXX object CMakeFiles/TaskScheduling.dir/src/models/CTask.cpp.o"
 	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/TaskScheduling.dir/src/models/CTask.cpp.o -MF CMakeFiles/TaskScheduling.dir/src/models/CTask.cpp.o.d -o CMakeFiles/TaskScheduling.dir/src/models/CTask.cpp.o -c /home/mira/Downloads/pscd/taskScedullingService/src/models/CTask.cpp
 
 CMakeFiles/TaskScheduling.dir/src/models/CTask.cpp.i: cmake_force
@@ -268,7 +282,7 @@ CMakeFiles/TaskScheduling.dir/src/models/CTask.cpp.s: cmake_force
 CMakeFiles/TaskScheduling.dir/src/models/CTimetable.cpp.o: CMakeFiles/TaskScheduling.dir/flags.make
 CMakeFiles/TaskScheduling.dir/src/models/CTimetable.cpp.o: /home/mira/Downloads/pscd/taskScedullingService/src/models/CTimetable.cpp
 CMakeFiles/TaskScheduling.dir/src/models/CTimetable.cpp.o: CMakeFiles/TaskScheduling.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/mira/Downloads/pscd/taskScedullingService/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_15) "Building CXX object CMakeFiles/TaskScheduling.dir/src/models/CTimetable.cpp.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/mira/Downloads/pscd/taskScedullingService/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_16) "Building CXX object CMakeFiles/TaskScheduling.dir/src/models/CTimetable.cpp.o"
 	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/TaskScheduling.dir/src/models/CTimetable.cpp.o -MF CMakeFiles/TaskScheduling.dir/src/models/CTimetable.cpp.o.d -o CMakeFiles/TaskScheduling.dir/src/models/CTimetable.cpp.o -c /home/mira/Downloads/pscd/taskScedullingService/src/models/CTimetable.cpp
 
 CMakeFiles/TaskScheduling.dir/src/models/CTimetable.cpp.i: cmake_force
@@ -282,7 +296,7 @@ CMakeFiles/TaskScheduling.dir/src/models/CTimetable.cpp.s: cmake_force
 CMakeFiles/TaskScheduling.dir/src/router.cpp.o: CMakeFiles/TaskScheduling.dir/flags.make
 CMakeFiles/TaskScheduling.dir/src/router.cpp.o: /home/mira/Downloads/pscd/taskScedullingService/src/router.cpp
 CMakeFiles/TaskScheduling.dir/src/router.cpp.o: CMakeFiles/TaskScheduling.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/mira/Downloads/pscd/taskScedullingService/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_16) "Building CXX object CMakeFiles/TaskScheduling.dir/src/router.cpp.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/mira/Downloads/pscd/taskScedullingService/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_17) "Building CXX object CMakeFiles/TaskScheduling.dir/src/router.cpp.o"
 	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/TaskScheduling.dir/src/router.cpp.o -MF CMakeFiles/TaskScheduling.dir/src/router.cpp.o.d -o CMakeFiles/TaskScheduling.dir/src/router.cpp.o -c /home/mira/Downloads/pscd/taskScedullingService/src/router.cpp
 
 CMakeFiles/TaskScheduling.dir/src/router.cpp.i: cmake_force
@@ -296,7 +310,7 @@ CMakeFiles/TaskScheduling.dir/src/router.cpp.s: cmake_force
 CMakeFiles/TaskScheduling.dir/src/serializers/NodeSerializer.cpp.o: CMakeFiles/TaskScheduling.dir/flags.make
 CMakeFiles/TaskScheduling.dir/src/serializers/NodeSerializer.cpp.o: /home/mira/Downloads/pscd/taskScedullingService/src/serializers/NodeSerializer.cpp
 CMakeFiles/TaskScheduling.dir/src/serializers/NodeSerializer.cpp.o: CMakeFiles/TaskScheduling.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/mira/Downloads/pscd/taskScedullingService/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_17) "Building CXX object CMakeFiles/TaskScheduling.dir/src/serializers/NodeSerializer.cpp.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/mira/Downloads/pscd/taskScedullingService/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_18) "Building CXX object CMakeFiles/TaskScheduling.dir/src/serializers/NodeSerializer.cpp.o"
 	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/TaskScheduling.dir/src/serializers/NodeSerializer.cpp.o -MF CMakeFiles/TaskScheduling.dir/src/serializers/NodeSerializer.cpp.o.d -o CMakeFiles/TaskScheduling.dir/src/serializers/NodeSerializer.cpp.o -c /home/mira/Downloads/pscd/taskScedullingService/src/serializers/NodeSerializer.cpp
 
 CMakeFiles/TaskScheduling.dir/src/serializers/NodeSerializer.cpp.i: cmake_force
@@ -310,7 +324,7 @@ CMakeFiles/TaskScheduling.dir/src/serializers/NodeSerializer.cpp.s: cmake_force
 CMakeFiles/TaskScheduling.dir/src/serializers/ResourceSerializer.cpp.o: CMakeFiles/TaskScheduling.dir/flags.make
 CMakeFiles/TaskScheduling.dir/src/serializers/ResourceSerializer.cpp.o: /home/mira/Downloads/pscd/taskScedullingService/src/serializers/ResourceSerializer.cpp
 CMakeFiles/TaskScheduling.dir/src/serializers/ResourceSerializer.cpp.o: CMakeFiles/TaskScheduling.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/mira/Downloads/pscd/taskScedullingService/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_18) "Building CXX object CMakeFiles/TaskScheduling.dir/src/serializers/ResourceSerializer.cpp.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/mira/Downloads/pscd/taskScedullingService/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_19) "Building CXX object CMakeFiles/TaskScheduling.dir/src/serializers/ResourceSerializer.cpp.o"
 	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/TaskScheduling.dir/src/serializers/ResourceSerializer.cpp.o -MF CMakeFiles/TaskScheduling.dir/src/serializers/ResourceSerializer.cpp.o.d -o CMakeFiles/TaskScheduling.dir/src/serializers/ResourceSerializer.cpp.o -c /home/mira/Downloads/pscd/taskScedullingService/src/serializers/ResourceSerializer.cpp
 
 CMakeFiles/TaskScheduling.dir/src/serializers/ResourceSerializer.cpp.i: cmake_force
@@ -324,7 +338,7 @@ CMakeFiles/TaskScheduling.dir/src/serializers/ResourceSerializer.cpp.s: cmake_fo
 CMakeFiles/TaskScheduling.dir/src/serializers/TaskSerializer.cpp.o: CMakeFiles/TaskScheduling.dir/flags.make
 CMakeFiles/TaskScheduling.dir/src/serializers/TaskSerializer.cpp.o: /home/mira/Downloads/pscd/taskScedullingService/src/serializers/TaskSerializer.cpp
 CMakeFiles/TaskScheduling.dir/src/serializers/TaskSerializer.cpp.o: CMakeFiles/TaskScheduling.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/mira/Downloads/pscd/taskScedullingService/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_19) "Building CXX object CMakeFiles/TaskScheduling.dir/src/serializers/TaskSerializer.cpp.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/mira/Downloads/pscd/taskScedullingService/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_20) "Building CXX object CMakeFiles/TaskScheduling.dir/src/serializers/TaskSerializer.cpp.o"
 	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/TaskScheduling.dir/src/serializers/TaskSerializer.cpp.o -MF CMakeFiles/TaskScheduling.dir/src/serializers/TaskSerializer.cpp.o.d -o CMakeFiles/TaskScheduling.dir/src/serializers/TaskSerializer.cpp.o -c /home/mira/Downloads/pscd/taskScedullingService/src/serializers/TaskSerializer.cpp
 
 CMakeFiles/TaskScheduling.dir/src/serializers/TaskSerializer.cpp.i: cmake_force
@@ -338,7 +352,7 @@ CMakeFiles/TaskScheduling.dir/src/serializers/TaskSerializer.cpp.s: cmake_force
 CMakeFiles/TaskScheduling.dir/src/serializers/TimetableSerializer.cpp.o: CMakeFiles/TaskScheduling.dir/flags.make
 CMakeFiles/TaskScheduling.dir/src/serializers/TimetableSerializer.cpp.o: /home/mira/Downloads/pscd/taskScedullingService/src/serializers/TimetableSerializer.cpp
 CMakeFiles/TaskScheduling.dir/src/serializers/TimetableSerializer.cpp.o: CMakeFiles/TaskScheduling.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/mira/Downloads/pscd/taskScedullingService/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_20) "Building CXX object CMakeFiles/TaskScheduling.dir/src/serializers/TimetableSerializer.cpp.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/mira/Downloads/pscd/taskScedullingService/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_21) "Building CXX object CMakeFiles/TaskScheduling.dir/src/serializers/TimetableSerializer.cpp.o"
 	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/TaskScheduling.dir/src/serializers/TimetableSerializer.cpp.o -MF CMakeFiles/TaskScheduling.dir/src/serializers/TimetableSerializer.cpp.o.d -o CMakeFiles/TaskScheduling.dir/src/serializers/TimetableSerializer.cpp.o -c /home/mira/Downloads/pscd/taskScedullingService/src/serializers/TimetableSerializer.cpp
 
 CMakeFiles/TaskScheduling.dir/src/serializers/TimetableSerializer.cpp.i: cmake_force
@@ -352,7 +366,7 @@ CMakeFiles/TaskScheduling.dir/src/serializers/TimetableSerializer.cpp.s: cmake_f
 CMakeFiles/TaskScheduling.dir/src/server.cpp.o: CMakeFiles/TaskScheduling.dir/flags.make
 CMakeFiles/TaskScheduling.dir/src/server.cpp.o: /home/mira/Downloads/pscd/taskScedullingService/src/server.cpp
 CMakeFiles/TaskScheduling.dir/src/server.cpp.o: CMakeFiles/TaskScheduling.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/mira/Downloads/pscd/taskScedullingService/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_21) "Building CXX object CMakeFiles/TaskScheduling.dir/src/server.cpp.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/mira/Downloads/pscd/taskScedullingService/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_22) "Building CXX object CMakeFiles/TaskScheduling.dir/src/server.cpp.o"
 	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/TaskScheduling.dir/src/server.cpp.o -MF CMakeFiles/TaskScheduling.dir/src/server.cpp.o.d -o CMakeFiles/TaskScheduling.dir/src/server.cpp.o -c /home/mira/Downloads/pscd/taskScedullingService/src/server.cpp
 
 CMakeFiles/TaskScheduling.dir/src/server.cpp.i: cmake_force
@@ -366,7 +380,7 @@ CMakeFiles/TaskScheduling.dir/src/server.cpp.s: cmake_force
 CMakeFiles/TaskScheduling.dir/src/services/CHttpServer.cpp.o: CMakeFiles/TaskScheduling.dir/flags.make
 CMakeFiles/TaskScheduling.dir/src/services/CHttpServer.cpp.o: /home/mira/Downloads/pscd/taskScedullingService/src/services/CHttpServer.cpp
 CMakeFiles/TaskScheduling.dir/src/services/CHttpServer.cpp.o: CMakeFiles/TaskScheduling.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/mira/Downloads/pscd/taskScedullingService/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_22) "Building CXX object CMakeFiles/TaskScheduling.dir/src/services/CHttpServer.cpp.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/mira/Downloads/pscd/taskScedullingService/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_23) "Building CXX object CMakeFiles/TaskScheduling.dir/src/services/CHttpServer.cpp.o"
 	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/TaskScheduling.dir/src/services/CHttpServer.cpp.o -MF CMakeFiles/TaskScheduling.dir/src/services/CHttpServer.cpp.o.d -o CMakeFiles/TaskScheduling.dir/src/services/CHttpServer.cpp.o -c /home/mira/Downloads/pscd/taskScedullingService/src/services/CHttpServer.cpp
 
 CMakeFiles/TaskScheduling.dir/src/services/CHttpServer.cpp.i: cmake_force
@@ -380,7 +394,7 @@ CMakeFiles/TaskScheduling.dir/src/services/CHttpServer.cpp.s: cmake_force
 CMakeFiles/TaskScheduling.dir/src/services/NodeService.cpp.o: CMakeFiles/TaskScheduling.dir/flags.make
 CMakeFiles/TaskScheduling.dir/src/services/NodeService.cpp.o: /home/mira/Downloads/pscd/taskScedullingService/src/services/NodeService.cpp
 CMakeFiles/TaskScheduling.dir/src/services/NodeService.cpp.o: CMakeFiles/TaskScheduling.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/mira/Downloads/pscd/taskScedullingService/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_23) "Building CXX object CMakeFiles/TaskScheduling.dir/src/services/NodeService.cpp.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/mira/Downloads/pscd/taskScedullingService/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_24) "Building CXX object CMakeFiles/TaskScheduling.dir/src/services/NodeService.cpp.o"
 	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/TaskScheduling.dir/src/services/NodeService.cpp.o -MF CMakeFiles/TaskScheduling.dir/src/services/NodeService.cpp.o.d -o CMakeFiles/TaskScheduling.dir/src/services/NodeService.cpp.o -c /home/mira/Downloads/pscd/taskScedullingService/src/services/NodeService.cpp
 
 CMakeFiles/TaskScheduling.dir/src/services/NodeService.cpp.i: cmake_force
@@ -391,10 +405,24 @@ CMakeFiles/TaskScheduling.dir/src/services/NodeService.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/TaskScheduling.dir/src/services/NodeService.cpp.s"
 	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/mira/Downloads/pscd/taskScedullingService/src/services/NodeService.cpp -o CMakeFiles/TaskScheduling.dir/src/services/NodeService.cpp.s
 
+CMakeFiles/TaskScheduling.dir/src/services/NotificationService.cpp.o: CMakeFiles/TaskScheduling.dir/flags.make
+CMakeFiles/TaskScheduling.dir/src/services/NotificationService.cpp.o: /home/mira/Downloads/pscd/taskScedullingService/src/services/NotificationService.cpp
+CMakeFiles/TaskScheduling.dir/src/services/NotificationService.cpp.o: CMakeFiles/TaskScheduling.dir/compiler_depend.ts
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/mira/Downloads/pscd/taskScedullingService/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_25) "Building CXX object CMakeFiles/TaskScheduling.dir/src/services/NotificationService.cpp.o"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/TaskScheduling.dir/src/services/NotificationService.cpp.o -MF CMakeFiles/TaskScheduling.dir/src/services/NotificationService.cpp.o.d -o CMakeFiles/TaskScheduling.dir/src/services/NotificationService.cpp.o -c /home/mira/Downloads/pscd/taskScedullingService/src/services/NotificationService.cpp
+
+CMakeFiles/TaskScheduling.dir/src/services/NotificationService.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing CXX source to CMakeFiles/TaskScheduling.dir/src/services/NotificationService.cpp.i"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/mira/Downloads/pscd/taskScedullingService/src/services/NotificationService.cpp > CMakeFiles/TaskScheduling.dir/src/services/NotificationService.cpp.i
+
+CMakeFiles/TaskScheduling.dir/src/services/NotificationService.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/TaskScheduling.dir/src/services/NotificationService.cpp.s"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/mira/Downloads/pscd/taskScedullingService/src/services/NotificationService.cpp -o CMakeFiles/TaskScheduling.dir/src/services/NotificationService.cpp.s
+
 CMakeFiles/TaskScheduling.dir/src/services/ResourceService.cpp.o: CMakeFiles/TaskScheduling.dir/flags.make
 CMakeFiles/TaskScheduling.dir/src/services/ResourceService.cpp.o: /home/mira/Downloads/pscd/taskScedullingService/src/services/ResourceService.cpp
 CMakeFiles/TaskScheduling.dir/src/services/ResourceService.cpp.o: CMakeFiles/TaskScheduling.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/mira/Downloads/pscd/taskScedullingService/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_24) "Building CXX object CMakeFiles/TaskScheduling.dir/src/services/ResourceService.cpp.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/mira/Downloads/pscd/taskScedullingService/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_26) "Building CXX object CMakeFiles/TaskScheduling.dir/src/services/ResourceService.cpp.o"
 	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/TaskScheduling.dir/src/services/ResourceService.cpp.o -MF CMakeFiles/TaskScheduling.dir/src/services/ResourceService.cpp.o.d -o CMakeFiles/TaskScheduling.dir/src/services/ResourceService.cpp.o -c /home/mira/Downloads/pscd/taskScedullingService/src/services/ResourceService.cpp
 
 CMakeFiles/TaskScheduling.dir/src/services/ResourceService.cpp.i: cmake_force
@@ -408,7 +436,7 @@ CMakeFiles/TaskScheduling.dir/src/services/ResourceService.cpp.s: cmake_force
 CMakeFiles/TaskScheduling.dir/src/services/SchedulerService.cpp.o: CMakeFiles/TaskScheduling.dir/flags.make
 CMakeFiles/TaskScheduling.dir/src/services/SchedulerService.cpp.o: /home/mira/Downloads/pscd/taskScedullingService/src/services/SchedulerService.cpp
 CMakeFiles/TaskScheduling.dir/src/services/SchedulerService.cpp.o: CMakeFiles/TaskScheduling.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/mira/Downloads/pscd/taskScedullingService/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_25) "Building CXX object CMakeFiles/TaskScheduling.dir/src/services/SchedulerService.cpp.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/mira/Downloads/pscd/taskScedullingService/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_27) "Building CXX object CMakeFiles/TaskScheduling.dir/src/services/SchedulerService.cpp.o"
 	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/TaskScheduling.dir/src/services/SchedulerService.cpp.o -MF CMakeFiles/TaskScheduling.dir/src/services/SchedulerService.cpp.o.d -o CMakeFiles/TaskScheduling.dir/src/services/SchedulerService.cpp.o -c /home/mira/Downloads/pscd/taskScedullingService/src/services/SchedulerService.cpp
 
 CMakeFiles/TaskScheduling.dir/src/services/SchedulerService.cpp.i: cmake_force
@@ -422,7 +450,7 @@ CMakeFiles/TaskScheduling.dir/src/services/SchedulerService.cpp.s: cmake_force
 CMakeFiles/TaskScheduling.dir/src/services/Sql.cpp.o: CMakeFiles/TaskScheduling.dir/flags.make
 CMakeFiles/TaskScheduling.dir/src/services/Sql.cpp.o: /home/mira/Downloads/pscd/taskScedullingService/src/services/Sql.cpp
 CMakeFiles/TaskScheduling.dir/src/services/Sql.cpp.o: CMakeFiles/TaskScheduling.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/mira/Downloads/pscd/taskScedullingService/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_26) "Building CXX object CMakeFiles/TaskScheduling.dir/src/services/Sql.cpp.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/mira/Downloads/pscd/taskScedullingService/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_28) "Building CXX object CMakeFiles/TaskScheduling.dir/src/services/Sql.cpp.o"
 	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/TaskScheduling.dir/src/services/Sql.cpp.o -MF CMakeFiles/TaskScheduling.dir/src/services/Sql.cpp.o.d -o CMakeFiles/TaskScheduling.dir/src/services/Sql.cpp.o -c /home/mira/Downloads/pscd/taskScedullingService/src/services/Sql.cpp
 
 CMakeFiles/TaskScheduling.dir/src/services/Sql.cpp.i: cmake_force
@@ -436,7 +464,7 @@ CMakeFiles/TaskScheduling.dir/src/services/Sql.cpp.s: cmake_force
 CMakeFiles/TaskScheduling.dir/src/services/TaskService.cpp.o: CMakeFiles/TaskScheduling.dir/flags.make
 CMakeFiles/TaskScheduling.dir/src/services/TaskService.cpp.o: /home/mira/Downloads/pscd/taskScedullingService/src/services/TaskService.cpp
 CMakeFiles/TaskScheduling.dir/src/services/TaskService.cpp.o: CMakeFiles/TaskScheduling.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/mira/Downloads/pscd/taskScedullingService/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_27) "Building CXX object CMakeFiles/TaskScheduling.dir/src/services/TaskService.cpp.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/mira/Downloads/pscd/taskScedullingService/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_29) "Building CXX object CMakeFiles/TaskScheduling.dir/src/services/TaskService.cpp.o"
 	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/TaskScheduling.dir/src/services/TaskService.cpp.o -MF CMakeFiles/TaskScheduling.dir/src/services/TaskService.cpp.o.d -o CMakeFiles/TaskScheduling.dir/src/services/TaskService.cpp.o -c /home/mira/Downloads/pscd/taskScedullingService/src/services/TaskService.cpp
 
 CMakeFiles/TaskScheduling.dir/src/services/TaskService.cpp.i: cmake_force
@@ -450,7 +478,7 @@ CMakeFiles/TaskScheduling.dir/src/services/TaskService.cpp.s: cmake_force
 CMakeFiles/TaskScheduling.dir/src/services/TimetableService.cpp.o: CMakeFiles/TaskScheduling.dir/flags.make
 CMakeFiles/TaskScheduling.dir/src/services/TimetableService.cpp.o: /home/mira/Downloads/pscd/taskScedullingService/src/services/TimetableService.cpp
 CMakeFiles/TaskScheduling.dir/src/services/TimetableService.cpp.o: CMakeFiles/TaskScheduling.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/mira/Downloads/pscd/taskScedullingService/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_28) "Building CXX object CMakeFiles/TaskScheduling.dir/src/services/TimetableService.cpp.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/mira/Downloads/pscd/taskScedullingService/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_30) "Building CXX object CMakeFiles/TaskScheduling.dir/src/services/TimetableService.cpp.o"
 	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/TaskScheduling.dir/src/services/TimetableService.cpp.o -MF CMakeFiles/TaskScheduling.dir/src/services/TimetableService.cpp.o.d -o CMakeFiles/TaskScheduling.dir/src/services/TimetableService.cpp.o -c /home/mira/Downloads/pscd/taskScedullingService/src/services/TimetableService.cpp
 
 CMakeFiles/TaskScheduling.dir/src/services/TimetableService.cpp.i: cmake_force
@@ -474,6 +502,7 @@ TaskScheduling_OBJECTS = \
 "CMakeFiles/TaskScheduling.dir/src/main.cpp.o" \
 "CMakeFiles/TaskScheduling.dir/src/models/CNode.cpp.o" \
 "CMakeFiles/TaskScheduling.dir/src/models/CNotification.cpp.o" \
+"CMakeFiles/TaskScheduling.dir/src/models/CNotificationGenerator.cpp.o" \
 "CMakeFiles/TaskScheduling.dir/src/models/CResource.cpp.o" \
 "CMakeFiles/TaskScheduling.dir/src/models/CScheduler.cpp.o" \
 "CMakeFiles/TaskScheduling.dir/src/models/CTask.cpp.o" \
@@ -486,6 +515,7 @@ TaskScheduling_OBJECTS = \
 "CMakeFiles/TaskScheduling.dir/src/server.cpp.o" \
 "CMakeFiles/TaskScheduling.dir/src/services/CHttpServer.cpp.o" \
 "CMakeFiles/TaskScheduling.dir/src/services/NodeService.cpp.o" \
+"CMakeFiles/TaskScheduling.dir/src/services/NotificationService.cpp.o" \
 "CMakeFiles/TaskScheduling.dir/src/services/ResourceService.cpp.o" \
 "CMakeFiles/TaskScheduling.dir/src/services/SchedulerService.cpp.o" \
 "CMakeFiles/TaskScheduling.dir/src/services/Sql.cpp.o" \
@@ -506,6 +536,7 @@ TaskScheduling: CMakeFiles/TaskScheduling.dir/src/controllers/TimetableControlle
 TaskScheduling: CMakeFiles/TaskScheduling.dir/src/main.cpp.o
 TaskScheduling: CMakeFiles/TaskScheduling.dir/src/models/CNode.cpp.o
 TaskScheduling: CMakeFiles/TaskScheduling.dir/src/models/CNotification.cpp.o
+TaskScheduling: CMakeFiles/TaskScheduling.dir/src/models/CNotificationGenerator.cpp.o
 TaskScheduling: CMakeFiles/TaskScheduling.dir/src/models/CResource.cpp.o
 TaskScheduling: CMakeFiles/TaskScheduling.dir/src/models/CScheduler.cpp.o
 TaskScheduling: CMakeFiles/TaskScheduling.dir/src/models/CTask.cpp.o
@@ -518,6 +549,7 @@ TaskScheduling: CMakeFiles/TaskScheduling.dir/src/serializers/TimetableSerialize
 TaskScheduling: CMakeFiles/TaskScheduling.dir/src/server.cpp.o
 TaskScheduling: CMakeFiles/TaskScheduling.dir/src/services/CHttpServer.cpp.o
 TaskScheduling: CMakeFiles/TaskScheduling.dir/src/services/NodeService.cpp.o
+TaskScheduling: CMakeFiles/TaskScheduling.dir/src/services/NotificationService.cpp.o
 TaskScheduling: CMakeFiles/TaskScheduling.dir/src/services/ResourceService.cpp.o
 TaskScheduling: CMakeFiles/TaskScheduling.dir/src/services/SchedulerService.cpp.o
 TaskScheduling: CMakeFiles/TaskScheduling.dir/src/services/Sql.cpp.o
@@ -532,7 +564,7 @@ TaskScheduling: /usr/lib/x86_64-linux-gnu/libboost_json.so.1.83.0
 TaskScheduling: /usr/lib/x86_64-linux-gnu/libboost_atomic.so.1.83.0
 TaskScheduling: /usr/lib/x86_64-linux-gnu/libboost_container.so.1.83.0
 TaskScheduling: CMakeFiles/TaskScheduling.dir/link.txt
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --bold --progress-dir=/home/mira/Downloads/pscd/taskScedullingService/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_29) "Linking CXX executable TaskScheduling"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --bold --progress-dir=/home/mira/Downloads/pscd/taskScedullingService/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_31) "Linking CXX executable TaskScheduling"
 	$(CMAKE_COMMAND) -E cmake_link_script CMakeFiles/TaskScheduling.dir/link.txt --verbose=$(VERBOSE)
 
 # Rule to build all files generated by this target.

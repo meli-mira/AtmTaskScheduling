@@ -154,7 +154,10 @@ void TaskController::deleteTask(Context &ctx)
     {
         string task_id = ctx.getParam("id").c_str();
         taskService->deleteTaskById(task_id);
-        // Todo delete task from loaded structures
+
+        // Delete from existing loaded list of tasks from Scheduling
+        CScheduler::getInstance()->deleteTask(task_id);
+
         res.result(http::status::no_content);
         res.set(http::field::server, BOOST_BEAST_VERSION_STRING);
     }
@@ -165,5 +168,34 @@ void TaskController::deleteTask(Context &ctx)
         res.set(http::field::server, BOOST_BEAST_VERSION_STRING);
         res.set(http::field::content_type, "application/json");
         res.body() = "{\"error\": \"Failed to delete task.\"}";
+    }
+}
+
+void TaskController::updateTask(Context &ctx)
+{
+    auto &req = ctx.getRequest();
+    auto &res = ctx.getResponse();
+    try
+    {
+        auto json = boost::json::parse(req.body());
+        vector<pair<string, string>> v = TaskSerializer::fromUpdateJson(json.as_object());
+        taskService->updateTask(v);
+
+        /* Update task to loaded structures */
+        if (v.size() > 1)
+            CScheduler::getInstance()->updateTask(v[0].second, v);
+
+        res.result(http::status::created);
+        res.body() = "{\"success\":\"Task updated \"}";
+        res.set(http::field::server, BOOST_BEAST_VERSION_STRING);
+        res.set(http::field::content_type, "application/json");
+    }
+    catch (const exception &e)
+    {
+        std::cerr << e.what() << endl;
+        res.result(http::status::internal_server_error);
+        res.set(http::field::server, BOOST_BEAST_VERSION_STRING);
+        res.set(http::field::content_type, "application/json");
+        res.body() = "{\"error\": \"Failed to update task.\"}";
     }
 }

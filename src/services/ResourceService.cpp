@@ -11,10 +11,8 @@ void ResourceService::init()
         json json_response = sql::database_utils::exec_sql(conn, sql::SELECT, sql_query);
         sql::database_utils::db_close(conn);
         if (json_response.size() == 1)
-        {
-            string last_id = to_string(json_response[0].at("resource_id"));
-            CResource::setID(std::stoi(last_id.substr(1, last_id.size() - 1)));
-        }
+            CResource::setID(stoi(json_response[0]["resource_id"].get<std::string>()));
+
         else
             CResource::setID(0);
     }
@@ -41,9 +39,6 @@ void ResourceService::addResource(const CResource *r)
     {
         std::cerr << e.what() << '\n';
     }
-
-    // todo
-    // add resource
 }
 
 json ResourceService::getAllResources()
@@ -110,13 +105,21 @@ void ResourceService::deleteResourceById(string id)
 {
     try
     {
-        string sql_query = "DELETE FROM resources WHERE resource_id = '" + id + "'";
+        // 1. delete asociated timetable"
+        string sql_query1 = "SELECT timetable_id FROM resources WHERE resource_id='" + id + "'";
+        string sql_query2 = "DELETE FROM task_resource WHERE resource_id='" + id + "'";
+        string sql_query3 = "DELETE FROM resources WHERE resource_id = '" + id + "'";
 
         connection conn = sql::database_utils::init();
-        json json_response = sql::database_utils::exec_sql(conn, sql::SELECT, sql_query);
+        json json_response = sql::database_utils::exec_sql(conn, sql::SELECT, sql_query1);
+        sql::database_utils::exec_sql(conn, sql::DELETE_, sql_query2);
+        sql::database_utils::exec_sql(conn, sql::DELETE_, sql_query3);
+        if (json_response.size() == 1)
+        {
+            sql_query1 = "DELETE FROM timetable WHERE timetable_id=" + json_response[0]["timetable_id"].get<std::string>();
+            sql::database_utils::exec_sql(conn, sql::DELETE_, sql_query1);
+        }
         sql::database_utils::db_close(conn);
-
-        // todo delete from existing loaded list of resources TRIGGER
     }
     catch (sql::database_exception &e)
     {

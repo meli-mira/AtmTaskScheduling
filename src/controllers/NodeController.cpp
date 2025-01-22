@@ -107,6 +107,9 @@ void NodeController::deleteNode(Context &ctx)
         string node_id = ctx.getParam("id").c_str();
         nodeService->deleteNodeById(node_id);
 
+        // Delete from existing loaded list of nodes from Scheduling
+        CScheduler::getInstance()->deleteNode(node_id);
+
         res.result(http::status::no_content);
         res.set(http::field::server, BOOST_BEAST_VERSION_STRING);
     }

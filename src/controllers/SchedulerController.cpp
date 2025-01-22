@@ -9,6 +9,7 @@ void SchedulerController::scheduleNode(Context &ctx)
         auto node = CScheduler::getInstance()->searchNode(ctx.getParam("node_id").c_str());
         if (node != NULL)
         {
+            /* Schedule tasks for node with given node_id */
             CScheduler::getInstance()->scheduleTasksForNode(node);
             CScheduler::getInstance()->printScheduledTasks(node);
 

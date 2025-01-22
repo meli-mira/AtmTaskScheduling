@@ -23,9 +23,6 @@ private:
 	CScheduler() {}
 	~CScheduler() {}
 
-	bool checkTaskDependencies(CTask *t, time_t startDate, time_t endDate);
-	void setTasksResourcesOcupied(CTask *t, time_t startDate, time_t endDate);
-
 public:
 	static CScheduler *getInstance();
 	static void destroyInstance();
@@ -38,21 +35,32 @@ public:
 	void printScheduledTasks(CNode *n);
 	void computeOutFileForPloting(CNode *n);
 
-	CNode *readNodeFromFile(string filename);
-	void readNodesFromFile(string filaname);
-	void readResourcesFromFile(string filename);
-
 	void printAll();
 
+	/* Add elements to loaded structures */
 	void addNode(CNode *n);
 	void addResource(CResource *r);
 	void addTaskToNode(string node_id, CTask *t);
 	void addResourceToTask(string task_id, string resource_id);
 
+	/* todo Delete elements from loaded structures */
+	void deleteNode(string node_id);
+	void deleteTask(string task_id);
+	void deleteResource(string resource_id);
+	void deleteResourceFromTasks(string resource_id);
+	void deleteTaskFromNode(string task_id, string node_id);
+	void deleteNotificationFromTask(string notification_id, string task_id, string node_id);
+	void deleteScheduleForTask(string task_id);
+
+	/* Update structures */
 	void updateSchedulingStructures(CNode *n);
+	void updateTask(string task_id, vector<pair<string, string>> v);
 
 	CNode *searchNode(string id);
 	CResource *searchResource(string id);
 
 	void DFS(CNode *Node);
+
+	string getTasksThatUseResourceBetween(string resourceID, time_t startDate, time_t endDate);
+	string getTasksBetween(string node_id, time_t startDate, time_t endDate);
 };

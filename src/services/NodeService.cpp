@@ -11,10 +11,7 @@ void NodeService::init()
         sql::database_utils::db_close(conn);
 
         if (json_response.size() == 1)
-        {
-            string last_id = to_string(json_response[0].at("node_id"));
-            CNode::setID(std::stoi(last_id.substr(1, last_id.size() - 1)));
-        }
+            CNode::setID(stoi(json_response[0]["node_id"].get<std::string>()));
         else
             CNode::setID(0);
     }
@@ -42,9 +39,6 @@ void NodeService::addNode(const CNode *n)
     {
         std::cerr << e.what() << '\n';
     }
-
-    // todo
-    // add node
 }
 
 json NodeService::getAllNodes()
@@ -110,13 +104,22 @@ void NodeService::deleteNodeById(string id)
 {
     try
     {
-        string sql_query = "DELETE FROM nodes WHERE node_id = '" + id + "'";
+        // 1. delete asociated timetable"
+        string sql_query1 = "SELECT timetable_id FROM nodes WHERE node_id='" + id + "'";
+
+        // 2. delete node
+        string sql_query2 = "DELETE FROM nodes WHERE node_id = '" + id + "'";
 
         connection conn = sql::database_utils::init();
-        json json_response = sql::database_utils::exec_sql(conn, sql::SELECT, sql_query);
-        sql::database_utils::db_close(conn);
+        json json_response = sql::database_utils::exec_sql(conn, sql::SELECT, sql_query1);
+        sql::database_utils::exec_sql(conn, sql::DELETE_, sql_query2);
+        if (json_response.size() == 1)
+        {
 
-        // todo delete from existing loaded list of resources TRIGGER
+            sql_query1 = "DELETE FROM timetable WHERE timetable_id=" + json_response[0]["timetable_id"].get<std::string>();
+            sql::database_utils::exec_sql(conn, sql::DELETE_, sql_query1);
+        }
+        sql::database_utils::db_close(conn);
     }
     catch (sql::database_exception &e)
     {

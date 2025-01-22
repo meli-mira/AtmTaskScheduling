@@ -1,5 +1,8 @@
 #pragma once
 
+#include <boost/asio.hpp>
+#include <boost/json.hpp>
+
 #include "../../include/models/CTask.h"
 #include "../../include/services/Sql.h"
 
@@ -13,7 +16,10 @@ public:
     virtual json getTaskById(string id) = 0;
     virtual json getTasksByNodeId(string node_id) = 0;
     virtual json getResourcesOfTask(string task_id) = 0;
+    virtual json getTasksOfResourceId(string resource_id) = 0;
     virtual void deleteTaskById(string id) = 0;
+    virtual void updateTask(CTask *t) = 0;
+    virtual void updateTask(vector<pair<string, string>> v) = 0;
 };
 
 class TaskService : public ITaskService
@@ -26,5 +32,8 @@ public:
     json getTaskById(string id) override;
     json getTasksByNodeId(string node_id) override;
     json getResourcesOfTask(string task_id) override;
+    json getTasksOfResourceId(string resource_id) override;
     void deleteTaskById(string id) override;
+    void updateTask(CTask *t) override;
+    void updateTask(vector<pair<string, string>> v) override;
 };

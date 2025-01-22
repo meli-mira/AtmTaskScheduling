@@ -1,10 +1,10 @@
 #pragma once
 #include "../CUtils.h"
 #include "../CLogger.h"
-#include "CTask.h"
+
 typedef enum NotificationType
 {
-	RESOURCE_USED,
+	RESOURCE_ALREADY_USED,
 	TASK_DEADLINE_MISS,
 	TASK_OVERLAPPING,
 	TASK_HIGHER_PRIORITY
@@ -13,15 +13,23 @@ typedef enum NotificationType
 class CNotification
 {
 	static int id;
-	string taskId;
+	int notification_id;
+	string task_id;
+	string node_id;
 	string description;
 	NotificationType type;
 
-	CTask *task;
-
 public:
 	CNotification();
-	CNotification(string description, NotificationType, CTask *t);
+	CNotification(string node_id, string task_id, string description, NotificationType type);
+
+	static void setID(int id);
+	void setDescription(string description);
+	int getID() const;
+	string getTaskID() const;
+	string getNodeID() const;
+	string getDescription() const;
+	NotificationType getType() const;
 
 	~CNotification();
 };

@@ -6,6 +6,7 @@
 #include <vector>
 #include "../CUtils.h"
 #include "CResource.h"
+#include "CNotificationGenerator.hpp"
 
 using namespace std;
 
@@ -14,6 +15,7 @@ typedef enum TaskType
 	FIXED,
 	INTERVAL_BASED
 } TaskType;
+
 class CTask
 {
 private:
@@ -26,7 +28,7 @@ private:
 	time_t startDate;
 	time_t endDate;
 
-	int duration; // nr zile
+	int duration; // days
 	time_t deadline;
 	time_t startNoEarlierThan;
 
@@ -37,11 +39,13 @@ private:
 	TaskType taskType;
 
 	string node_id;
+	CNotification *notification;
+
 	int verifyInterval(CTimetable *nodeTimetable, int nodeCapacity, time_t &startTime, time_t &stopTime);
 
 public:
+	CTask();
 	CTask(int priority, string name, string description, time_t startPoint, time_t endPoint, int duration, TaskType type, string node_id);
-	CTask(int priority, string name, string description, time_t startPoint, time_t endPoint, int duration, TaskType type, string resourceFile, string node_id);
 
 	string getID() const;
 	string getNodeId() const;
@@ -51,16 +55,26 @@ public:
 	time_t getEndDate() const;
 	time_t getDeadline() const;
 	time_t getStartNoEarlierThan() const;
+	CNotification *getNotification() const;
 
 	int getPriority() const;
 	int getDuration() const;
 	bool getHasBeenPlanned() const;
+	bool getHasIssues() const;
 	bool getIsFixed() const;
 	bool getIsIntervalBased() const;
+	bool isResourceByIdUsed(string resource_id);
 	TaskType getTaskType() const;
 	vector<CResource *> getResources() const;
 
 	void setTaskID(string task_id);
+	void setNodeID(string node_id);
+	void setName(string name);
+	void setPriority(int priority);
+	void setDuration(int duration);
+	void setDescription(string description);
+	void setStartNoEarlierThan(time_t t);
+	void setDeadline(time_t t);
 	void setStartDate(time_t date);
 	void setEndDate(time_t date);
 	void setHasIssues(bool hasIssues);
@@ -74,6 +88,8 @@ public:
 	int unscheduleTask(CTimetable *nodeTimetable);
 
 	void print() const;
+
+	void deleteResource(string resource_id);
 
 	~CTask();
 };

@@ -393,6 +393,30 @@ src/models/CNotification.cpp.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/TaskScheduling.dir/build.make CMakeFiles/TaskScheduling.dir/src/models/CNotification.cpp.s
 .PHONY : src/models/CNotification.cpp.s
 
+src/models/CNotificationGenerator.o: src/models/CNotificationGenerator.cpp.o
+.PHONY : src/models/CNotificationGenerator.o
+
+# target to build an object file
+src/models/CNotificationGenerator.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/TaskScheduling.dir/build.make CMakeFiles/TaskScheduling.dir/src/models/CNotificationGenerator.cpp.o
+.PHONY : src/models/CNotificationGenerator.cpp.o
+
+src/models/CNotificationGenerator.i: src/models/CNotificationGenerator.cpp.i
+.PHONY : src/models/CNotificationGenerator.i
+
+# target to preprocess a source file
+src/models/CNotificationGenerator.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/TaskScheduling.dir/build.make CMakeFiles/TaskScheduling.dir/src/models/CNotificationGenerator.cpp.i
+.PHONY : src/models/CNotificationGenerator.cpp.i
+
+src/models/CNotificationGenerator.s: src/models/CNotificationGenerator.cpp.s
+.PHONY : src/models/CNotificationGenerator.s
+
+# target to generate assembly for a file
+src/models/CNotificationGenerator.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/TaskScheduling.dir/build.make CMakeFiles/TaskScheduling.dir/src/models/CNotificationGenerator.cpp.s
+.PHONY : src/models/CNotificationGenerator.cpp.s
+
 src/models/CResource.o: src/models/CResource.cpp.o
 .PHONY : src/models/CResource.o
 
@@ -681,6 +705,30 @@ src/services/NodeService.cpp.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/TaskScheduling.dir/build.make CMakeFiles/TaskScheduling.dir/src/services/NodeService.cpp.s
 .PHONY : src/services/NodeService.cpp.s
 
+src/services/NotificationService.o: src/services/NotificationService.cpp.o
+.PHONY : src/services/NotificationService.o
+
+# target to build an object file
+src/services/NotificationService.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/TaskScheduling.dir/build.make CMakeFiles/TaskScheduling.dir/src/services/NotificationService.cpp.o
+.PHONY : src/services/NotificationService.cpp.o
+
+src/services/NotificationService.i: src/services/NotificationService.cpp.i
+.PHONY : src/services/NotificationService.i
+
+# target to preprocess a source file
+src/services/NotificationService.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/TaskScheduling.dir/build.make CMakeFiles/TaskScheduling.dir/src/services/NotificationService.cpp.i
+.PHONY : src/services/NotificationService.cpp.i
+
+src/services/NotificationService.s: src/services/NotificationService.cpp.s
+.PHONY : src/services/NotificationService.s
+
+# target to generate assembly for a file
+src/services/NotificationService.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/TaskScheduling.dir/build.make CMakeFiles/TaskScheduling.dir/src/services/NotificationService.cpp.s
+.PHONY : src/services/NotificationService.cpp.s
+
 src/services/ResourceService.o: src/services/ResourceService.cpp.o
 .PHONY : src/services/ResourceService.o
 
@@ -843,6 +891,9 @@ help:
 	@echo "... src/models/CNotification.o"
 	@echo "... src/models/CNotification.i"
 	@echo "... src/models/CNotification.s"
+	@echo "... src/models/CNotificationGenerator.o"
+	@echo "... src/models/CNotificationGenerator.i"
+	@echo "... src/models/CNotificationGenerator.s"
 	@echo "... src/models/CResource.o"
 	@echo "... src/models/CResource.i"
 	@echo "... src/models/CResource.s"
@@ -879,6 +930,9 @@ help:
 	@echo "... src/services/NodeService.o"
 	@echo "... src/services/NodeService.i"
 	@echo "... src/services/NodeService.s"
+	@echo "... src/services/NotificationService.o"
+	@echo "... src/services/NotificationService.i"
+	@echo "... src/services/NotificationService.s"
 	@echo "... src/services/ResourceService.o"
 	@echo "... src/services/ResourceService.i"
 	@echo "... src/services/ResourceService.s"

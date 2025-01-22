@@ -5,55 +5,82 @@ int CTask::id = 0;
 int CTask::verifyInterval(CTimetable *nodeTimetable, int nodeCapacity, time_t &startDate, time_t &endDate)
 {
 	int startIndex = nodeTimetable->getIndexForDate(startDate);
-	int n = duration;
-	int nr = 0, ok = 0, resourceAlocated;
+	int n = this->duration, nrPlannedDays = 0, resourceAlocated, i, j;
 
-	for (int i = startIndex; nr < n && i < nodeTimetable->getNrOfDays(); i++)
+	for (i = startIndex; nrPlannedDays < n && i < nodeTimetable->getNrOfDays(); i++)
 	{
+		// 1. check if index i day is not a working day
 		if (nodeTimetable->at(i) == -1)
 		{
-			if (nr == 0) // the first date from interval
+			// 2. if the first date from interval is unavailable, change startDate by 1 day
+			if (nrPlannedDays == 0)
 				startDate = CUtils::addDays(startDate, 1);
+
+			// 3. if day i is not a working day, add one day to endDate
 			endDate = CUtils::addDays(endDate, 1);
 		}
+		// 4. check the node workload at day i
 		else if (nodeTimetable->at(i) < nodeCapacity)
 		{
-			// resources are free?
+			// 5. check if used resources are free
 			resourceAlocated = 0;
-			for (int j = 0; j < usedResources.size(); j++)
+			for (j = 0; j < this->usedResources.size(); j++)
 			{
-				if (usedResources[j]->isTheResourceAllocated(i) == true)
+				if (this->usedResources[j]->isTheResourceAllocated(i) == true)
 				{
 					resourceAlocated = 1;
 					break;
 				}
 			}
+			// 6. if all the task's used resources are free, the day is allocated
 			if (resourceAlocated == 0)
-			{
-				nr++; // all good
-			}
+				nrPlannedDays++;
 			else
 			{
-				// one of the resource is alocated in the day with index i -->try to bypass
+				// 7. one of the wanted resource is alocated in the day with index i --> try to bypass by starting a new planning interval
 				startDate = nodeTimetable->getDateFromIndex(i + 1);
 				endDate = CUtils::addDays(startDate, duration - 1);
-				nr = 0;
+				nrPlannedDays = 0; // restart the number planned days
+
+				// 8. if the new endDate misses deadline, generate a RESOURCE_USED notification
+				cout << CUtils::dateToString(startDate, "%d.%m.%Y") << "         " << CUtils::dateToString(endDate, "%d.%m.%Y") << endl;
+				if (CUtils::compareDates(endDate, deadline) == false)
+				{
+					cout << "\nherereee\n";
+					this->notification = CNotificationGenerator::generate_RESOURCE_USED_notification(this->node_id, this->task_id, this->usedResources[j]->getID(), this->startDate, this->endDate);
+					return -1;
+				}
 			}
 		}
 		else
 		{
-			/* capacitatea maxima depasita -> resetarea intervalului */
+			// 9. the node workload at day i is at maximum node capacity --> try to bypass by starting a new planning interval
 			startDate = nodeTimetable->getDateFromIndex(i + 1);
 			endDate = CUtils::addDays(startDate, duration - 1);
-			// cout << CUtils::dateToString(startDate, "%Y.%m.%d") << " " << CUtils::dateToString(endDate, "%Y.%m.%d") << endl;
-			nr = 0;
+			nrPlannedDays = 0; // restart the number planned days
+			cout << CUtils::dateToString(startDate, "%d.%m.%Y") << "         " << CUtils::dateToString(endDate, "%d.%m.%Y") << endl;
+			// 10. if the new endDate misses deadline, generate a TASK_OVERLAPPING notification
+			if (CUtils::compareDates(endDate, deadline) == false)
+			{
+				cout << "\nhere2\n";
+				this->notification = CNotificationGenerator::generate_TASK_OVERLAPPING_notification(this->node_id, this->task_id, this->startDate, this->endDate);
+				return -1;
+			}
 		}
 
+		// 11. if the endDate misses deadline, generate a TASK_DEADLINE_MISS notification as there are not enough working days
 		if (CUtils::compareDates(endDate, deadline) == false)
+		{
+			cout << CUtils::dateToString(deadline, "%d.%m.%Y") << "         " << CUtils::dateToString(endDate, "%d.%m.%Y") << endl;
+			this->notification = CNotificationGenerator::generate_TASK_DEADLINE_MISS_notification(this->node_id, this->task_id, this->startDate, this->endDate);
 			return -1;
+		}
 	}
-	return nr;
+
+	return nrPlannedDays;
 }
+
+CTask::CTask() {}
 
 CTask::CTask(int priority, string name, string description, time_t startPoint, time_t endPoint, int duration, TaskType type, string node_id)
 {
@@ -73,38 +100,7 @@ CTask::CTask(int priority, string name, string description, time_t startPoint, t
 	this->deadline = endPoint;
 
 	this->node_id = node_id;
-}
-
-CTask::CTask(int priority, string name, string description, time_t startPoint, time_t endPoint, int duration, TaskType type, string resourceFile, string node_id)
-{
-	this->priority = priority;
-	this->name = name;
-	this->description = description;
-	this->duration = duration;
-
-	this->hasBeenPlanned = false;
-	this->hasIssues = false;
-	this->taskType = type;
-
-	this->task_id = to_string(id);
-	id++;
-
-	this->startNoEarlierThan = startPoint;
-	this->deadline = endPoint;
-	this->node_id = node_id;
-
-	ifstream f(resourceFile);
-	CResource *r;
-
-	string resourceID;
-	while (f >> resourceID)
-	{
-		r = CScheduler::getInstance()->searchResource(resourceID);
-		if (r != NULL)
-			usedResources.push_back(r);
-	}
-
-	f.close();
+	this->notification = NULL;
 }
 
 string CTask::getID() const
@@ -147,6 +143,11 @@ time_t CTask::getStartNoEarlierThan() const
 	return startNoEarlierThan;
 }
 
+CNotification *CTask::getNotification() const
+{
+	return this->notification;
+}
+
 int CTask::getPriority() const
 {
 	return priority;
@@ -162,12 +163,27 @@ bool CTask::getHasBeenPlanned() const
 	return hasBeenPlanned;
 }
 
+bool CTask::getHasIssues() const
+{
+	return this->hasIssues;
+}
+
 bool CTask::getIsIntervalBased() const
 {
 	if (taskType == INTERVAL_BASED)
 		return true;
 	else
 		return false;
+}
+
+bool CTask::isResourceByIdUsed(string resource_id)
+{
+	for (int i = 0; i < usedResources.size(); i++)
+	{
+		if (usedResources[i]->getID() == resource_id)
+			return true;
+	}
+	return false;
 }
 
 TaskType CTask::getTaskType() const
@@ -191,6 +207,41 @@ bool CTask::getIsFixed() const
 void CTask::setTaskID(string task_id)
 {
 	this->task_id = task_id;
+}
+
+void CTask::setNodeID(string node_id)
+{
+	this->node_id = node_id;
+}
+
+void CTask::setName(string name)
+{
+	this->name = name;
+}
+
+void CTask::setPriority(int priority)
+{
+	this->priority = priority;
+}
+
+void CTask::setDuration(int duration)
+{
+	this->duration = duration;
+}
+
+void CTask::setDescription(string description)
+{
+	this->description = description;
+}
+
+void CTask::setStartNoEarlierThan(time_t t)
+{
+	this->startNoEarlierThan = t;
+}
+
+void CTask::setDeadline(time_t t)
+{
+	this->deadline = t;
 }
 
 void CTask::setStartDate(time_t date)
@@ -234,24 +285,25 @@ int CTask::scheduleTask(CTimetable *nodeTimetable, int nodeCapacity)
 	startDate = this->startNoEarlierThan;
 	endDate = CUtils::addDays(startDate, this->duration - 1);
 
-	int n = verifyInterval(nodeTimetable, nodeCapacity, startDate, endDate);
+	int nrPlannedDays = verifyInterval(nodeTimetable, nodeCapacity, startDate, endDate);
 
-	if (n != -1)
+	// 1. the task has been succesfully planned
+	if (nrPlannedDays != -1)
 	{
 		this->startDate = startDate;
 		this->endDate = endDate;
 		this->hasBeenPlanned = true;
+
+		// 2. mark the planned days as ocupied
 		nodeTimetable->setOcupied(startDate, endDate);
 
-		// success
-		// set the resources of the planned task ocupied
+		// 3. set the resources of the planned task ocupied
 		for (int i = 0; i < this->usedResources.size(); i++)
 			usedResources[i]->setTheResourceOcupied(this, startDate, endDate);
 	}
+	// 4. task has failed to be planned, a notification has been generated
 	else
 	{
-		// todo notification  + mai prioritar?
-		cout << "Not possible to schedule the task. there are no " << endl;
 		this->hasIssues = true;
 		this->hasBeenPlanned = false;
 		return -1;
@@ -280,11 +332,23 @@ void CTask::print() const
 {
 	cout << "\tTask:" << name << " " << duration << ":";
 	if (hasBeenPlanned == true)
+
 		cout << "\t" << CUtils::dateToString(startDate, "%Y-%m-%d") << "\t" << CUtils::dateToString(endDate, "%Y-%m-%d") << endl;
 
 	for (int i = 0; i < usedResources.size(); i++)
 		usedResources[i]->print();
+
 	cout << endl;
+}
+
+void CTask::deleteResource(string resource_id)
+{
+	for (int i = 0; i < usedResources.size(); i++)
+		if (usedResources[i]->getID() == resource_id)
+		{
+			usedResources.erase(usedResources.begin() + i);
+			return;
+		}
 }
 
 CTask::~CTask()
