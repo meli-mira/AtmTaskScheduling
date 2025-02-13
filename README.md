@@ -45,6 +45,9 @@ Example:
     * POST /resources-task  : Adds a resource to a task.
     * PUT /task  : Updates a task.
     * DELETE /task/{id} : Deletes the task with id.
+** Example of json for POST /task
+![image](https://github.com/user-attachments/assets/e81fc915-828a-47ed-87ef-b0078175e0db)
+
 * 0.1
     * Initial Release
 
