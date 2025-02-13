@@ -13,9 +13,15 @@ This project is a HTTP server application written in C++ that demonstrates handl
 ## Buiding the Project
 1. Clone the repository:
 ```
-git clone
+git clone https://github.com/meli-mira/AtmTaskScheduling.git
 cd AtmTaskScheduling/build
 ```
+
+2. Configure the project with CMake:
+```
+cmake ..
+```
+This will generate an executable file in the build directory.
 ## Running the Server
 
 ## Available Endpoints
