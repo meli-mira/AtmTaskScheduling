@@ -102,5 +102,8 @@ Example:
 }
 ```
 * Schedule:
-   * ;;
-
+   * GET /schedule-report-node/{node_id}/{startDate}/{endDate} : Retrives the planned tasks of node with node_id betweeen startDate and endDate.
+   * GET /schedule-report-all-node/{node_id}/{startDate}/{endDate} : Retrives the planned tasks of all the nodes of the tree starting from node with node_id betweeen startDate and endDate.
+   * GET /schedule-report-resource/{resource_id}/{startDate}/{endDate} : Retrives the usage schedule of resource with resource_id betweeen startDate and endDate.
+   * POST /schedule/{node_id} : Starts the scheduling algorithm for tasks of the node with node_id.
+   * POST /schedule-all/{node_id} : Starts the scheduling algorithm for tasks of all the nodes of the tree starting from node with node_id.
