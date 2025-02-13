@@ -9,6 +9,7 @@ This project is a HTTP server application written in C++ that demonstrates handl
 * C++20 compatible compiler (GCC, Clang, MSVC, etc.)
 * CMake version 3.14 or higher
 * Boost libraries, version 1.71.0 or higher
+* Libpqxx library 7.x versions
 
 ## Buiding the Project
 1. Clone the repository:
@@ -26,7 +27,9 @@ make
 ```
 This will generate an executable file in the build directory.
 ## Running the Server
+
 Usage: TaskScheduling <server_address> <port> <threads>
+
 Example:
 ```
 ./TaskScheduling 0.0.0.0 8080 1
