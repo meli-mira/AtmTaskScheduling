@@ -36,7 +36,7 @@ Example:
 ```
 ## Available Endpoints
 
-* Tasks
+* Tasks:
     * GET /tasks : Retrives all the tasks available.
     * GET /tasks/{node_id} : Retrives all the tasks of node with node_id.
     * GET /task/{id} : Retrives the details of the task with id.
@@ -46,7 +46,7 @@ Example:
     * PUT /task  : Updates a task.
     * DELETE /task/{id} : Deletes the task with id.
       
-** Example of json for POST /task
+* Example of json for POST /task
 ```
 {
 "name":"task1",
@@ -59,7 +59,20 @@ Example:
 "node_id":"2"
 }
 ```
+* Example of json for POST /resources-task
+  
+```
+{
+"task_id":"1",
+"resource_id":"4",
+}
+```
+* Resources:
+   *kk
+  
+* Nodes
+    * ccv
 
-* 0.1
-    * Initial Release
+* Schedule:
+   * ;;
 
