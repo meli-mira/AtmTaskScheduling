@@ -36,7 +36,8 @@ Example:
 ```
 ## Available Endpoints
 
-*
- ```
+
+*```
   GET /tasks
-``` get all the tasks
+```
+ get all the tasks
