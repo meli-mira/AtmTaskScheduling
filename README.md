@@ -39,12 +39,12 @@ Example:
 * Tasks:
     * GET /tasks : Retrives all the tasks available.
     * GET /tasks/{node_id} : Retrives all the tasks of node with node_id.
-    * GET /task/{id} : Retrives the details of the task with id.
-    * GET /resources-task/{task_id} : Retrives all the resources of the task with task_id.
+    * GET /task/{id} : Retrives a task entity by id.
+    * GET /resources-task/{task_id} : Retrives the resource entities of the task by task_id.
     * POST /task : Creates a new task entity.
     * POST /resources-task  : Adds a resource to a task.
-    * PUT /task  : Updates a task.
-    * DELETE /task/{id} : Deletes the task with id.
+    * PUT /task  : Updates a task entity.
+    * DELETE /task/{id} : Deletes a task entity by id.
       
 * Example of json for POST /task
 ```
@@ -68,8 +68,21 @@ Example:
 }
 ```
 * Resources:
-   *kk
+   * GET /resources : Retrives all the resource entities.
+   * GET /resources/{id} : Retrives a resource entity by id.
+   * GET /resources/task/{task_id} : Retrives all the resources of the task with task_id.
+   * POST /resource : Creates a new resource entity.
+   * DELETE /resource/{id} : Deletes a resource entity by id.
+
+* Example of json for POST /resource
   
+```
+{
+"name":"resource_name",
+"capacity":"1",
+}
+```
+
 * Nodes
     * ccv
 
