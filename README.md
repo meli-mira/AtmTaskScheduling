@@ -11,7 +11,11 @@ This project is a HTTP server application written in C++ that demonstrates handl
 * Boost libraries, version 1.71.0 or higher
 
 ## Buiding the Project
-
+1. Clone the repository:
+```
+git clone
+cd AtmTaskScheduling/build
+```
 ## Running the Server
 
 ## Available Endpoints
