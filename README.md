@@ -79,13 +79,28 @@ Example:
 ```
 {
 "name":"resource_name",
-"capacity":"1",
+"capacity":"1"
 }
 ```
 
 * Nodes
-    * ccv
+    * GET /nodes : Retrives all the node entities.
+    * GET /node/{id} : Retrives a node entity by id.
+    * GET /nodes/{parent_id} : Retrives all the child nodes of the parent node with parent_id.
+    * POST /node : Creates a new node entity.
+    * DELETE /node/{id} : Deletes a node entity by id.
 
+* Example of json for POST /resource
+  
+```
+{
+"name":"node_name",
+"capacity":"2",
+"minpriority":"10",
+"maxpriority":"20",
+"parent_node_id":"1"
+}
+```
 * Schedule:
    * ;;
 
