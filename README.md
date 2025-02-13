@@ -107,3 +107,9 @@ Example:
    * GET /schedule-report-resource/{resource_id}/{startDate}/{endDate} : Retrives the usage schedule of resource with resource_id betweeen startDate and endDate.
    * POST /schedule/{node_id} : Starts the scheduling algorithm for tasks of the node with node_id.
    * POST /schedule-all/{node_id} : Starts the scheduling algorithm for tasks of all the nodes of the tree starting from node with node_id.
+ 
+* Notification:
+  * GET /notification/{notification_id} : Retrives a notification entity by id.
+  * GET /notifications-node/{node_id} : Retrives all the notification entities of a node with node_id.
+  * GET /notifications-task/{task_id} : Retrives all the notification entities of a task with task_id.
+  * DELETE /notification/{id} : Deletes a notification entity by id.
