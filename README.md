@@ -28,10 +28,15 @@ make
 This will generate an executable file in the build directory.
 ## Running the Server
 
-Usage: TaskScheduling <server_address> <port> <threads>
+Usage: TaskScheduling <server_address>  <port>  <threads>
 
 Example:
 ```
 ./TaskScheduling 0.0.0.0 8080 1
 ```
 ## Available Endpoints
+
+*
+ ```
+  GET /tasks
+``` get all the tasks
