@@ -1,4 +1,4 @@
-#include "../../include/services/TaskService.h"
+#include "../../include/services/TaskService.hpp"
 
 void TaskService::init()
 {
@@ -54,6 +54,8 @@ void TaskService::addTask(const CTask *t)
         sql::database_utils::exec_sql(conn, sql::INSERT, sql_query);
         sql::database_utils::exec_sql(conn, sql::INSERT, sql_query2);
         sql::database_utils::db_close(conn);
+
+        CLogger::log("TaskService", "Task with id " + t->getID() + " has succesfully been added");
     }
     catch (sql::database_exception &e)
     {
@@ -71,6 +73,8 @@ void TaskService::addResourceToTask(const string task_id, const string resource_
         connection conn = sql::database_utils::init();
         sql::database_utils::exec_sql(conn, sql::INSERT, sql_query);
         sql::database_utils::db_close(conn);
+
+        CLogger::log("TaskService", "Resource with id " + resource_id + " has succesfully been added to task with id " + task_id);
     }
     catch (sql::database_exception &e)
     {
@@ -207,6 +211,8 @@ void TaskService::deleteTaskById(string id)
         json_response = sql::database_utils::exec_sql(conn, sql::SELECT, sql_query3);
         json_response = sql::database_utils::exec_sql(conn, sql::SELECT, sql_query4);
         sql::database_utils::db_close(conn);
+
+        CLogger::log("TaskService", "Task with id " + id + " has succesfully been deleted");
     }
     catch (sql::database_exception &e)
     {
@@ -247,6 +253,8 @@ void TaskService::updateTask(CTask *t)
         connection conn = sql::database_utils::init();
         json json_response = sql::database_utils::exec_sql(conn, sql::UPDATE, sql_query);
         sql::database_utils::db_close(conn);
+
+        CLogger::log("TaskService", "Task with id " + t->getID() + " has succesfully been updated");
     }
     catch (sql::database_exception &e)
     {
@@ -271,6 +279,8 @@ void TaskService::updateTask(vector<pair<string, string>> v)
         connection conn = sql::database_utils::init();
         json json_response = sql::database_utils::exec_sql(conn, sql::UPDATE, sql_query);
         sql::database_utils::db_close(conn);
+
+        CLogger::log("TaskService", "Task with id " + v[0].second + " has succesfully been added");
     }
     catch (sql::database_exception &e)
     {

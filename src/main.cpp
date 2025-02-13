@@ -1,9 +1,9 @@
 #define _CRT_SECURE_NO_WARNINGS
 #pragma warning(disable : 4996)
-#include "../include/models/CScheduler.h"
+#include "../include/models/CScheduler.hpp"
 #include "../include/server.hpp"
 #include "../include/router.hpp"
-#include "../include/controllers/TaskController.h"
+#include "../include/controllers/TaskController.hpp"
 #include "../include/controllers/ResourceController.hpp"
 #include "../include/controllers/TimetableController.hpp"
 #include "../include/controllers/NodeController.hpp"
@@ -100,6 +100,12 @@ int main(int argc, char *argv[])
 						 { schedulerController->scheduleNode(ctx); });
 		router->addRoute(POST, "/schedule-all/{node-id}", [schedulerController](auto &ctx)
 						 { schedulerController->scheduleAllNodesFrom(ctx); });
+		router->addRoute(GET, "/schedule-report-node/{node_id}/{startDate}/{endDate}", [schedulerController](auto &ctx)
+						 { schedulerController->getSchedulingReportBetweenForNode(ctx); });
+		router->addRoute(GET, "/schedule-report-all-node/{node_id}/{startDate}/{endDate}", [schedulerController](auto &ctx)
+						 { schedulerController->getSchedulingReportBetweenFromNode(ctx); });
+		router->addRoute(GET, "/schedule-report-resource/{resource_id}/{startDate}/{endDate}", [schedulerController](auto &ctx)
+						 { schedulerController->getSchedulingReportBetweenForResource(ctx); });
 
 		// Routes for notifications
 		auto notificationService = std::make_shared<NotificationService>();

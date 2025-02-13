@@ -1,5 +1,5 @@
-#include "../../include/models/CTask.h"
-#include "../../include/models/CScheduler.h"
+#include "../../include/models/CTask.hpp"
+#include "../../include/models/CScheduler.hpp"
 int CTask::id = 0;
 
 int CTask::verifyInterval(CTimetable *nodeTimetable, int nodeCapacity, time_t &startDate, time_t &endDate)
@@ -95,6 +95,26 @@ CTask::CTask(int priority, string name, string description, time_t startPoint, t
 
 	this->task_id = to_string(id);
 	id++;
+
+	this->startNoEarlierThan = startPoint;
+	this->deadline = endPoint;
+
+	this->node_id = node_id;
+	this->notification = NULL;
+}
+
+CTask::CTask(string task_id, int priority, string name, string description, time_t startPoint, time_t endPoint, int duration, TaskType type, string node_id)
+{
+	this->priority = priority;
+	this->name = name;
+	this->description = description;
+	this->duration = duration;
+
+	this->hasBeenPlanned = false;
+	this->hasIssues = false;
+	this->taskType = type;
+
+	this->task_id = task_id;
 
 	this->startNoEarlierThan = startPoint;
 	this->deadline = endPoint;

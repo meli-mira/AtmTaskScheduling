@@ -1,6 +1,6 @@
 #pragma once
-#include "../CUtils.h"
-#include "../CLogger.h"
+#include "../CUtils.hpp"
+#include "../CLogger.hpp"
 
 typedef enum NotificationType
 {

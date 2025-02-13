@@ -47,6 +47,8 @@ void TimetableService::addTimetable(const CTimetable *t)
         connection conn = sql::database_utils::init();
         json json_response = sql::database_utils::exec_sql(conn, sql::INSERT, sql_query);
         sql::database_utils::db_close(conn);
+
+        CLogger::log("TimetableService", "Timetable with id " + to_string(t->getID()) + " has succesfully been added");
     }
     catch (sql::database_exception &e)
     {
@@ -131,6 +133,7 @@ void TimetableService::deleteTimetableById(string id)
         sql::database_utils::db_close(conn);
 
         // todo delete from existing loaded list of resources
+        CLogger::log("TimetableService", "Timetable with id " + id + " has succesfully been deleted");
     }
     catch (sql::database_exception &e)
     {
@@ -158,6 +161,8 @@ void TimetableService::updateTimetable(const CTimetable *t)
         connection conn = sql::database_utils::init();
         json json_response = sql::database_utils::exec_sql(conn, sql::UPDATE, sql_query);
         sql::database_utils::db_close(conn);
+
+        CLogger::log("TimetableService", "Timetable with id " + to_string(t->getID()) + " has succesfully been updated");
     }
     catch (sql::database_exception &e)
     {

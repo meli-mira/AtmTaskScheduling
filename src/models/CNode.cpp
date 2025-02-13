@@ -1,4 +1,4 @@
-#include "../../include/models/CNode.h"
+#include "../../include/models/CNode.hpp"
 #include "../../include/services/NodeService.hpp"
 int CNode::id = 1;
 
@@ -20,6 +20,7 @@ CNode::CNode(string name, int minPriority, int maxPriority, string parent_node_i
 	id++;
 
 	timetable = new CTimetable(time(0));
+	timetable_id = timetable->getID();
 }
 
 CNode::CNode(string id, string name, int minPriority, int maxPriority, string parent_node_id, int capacity, int timetable_id)
@@ -77,9 +78,8 @@ vector<CTask *> CNode::getTasksBetween(time_t startDate, time_t endDate) const
 	{
 		for (int i = 0; i < tasks.size(); i++)
 		{
-			// There are no intersections if plannedTaskEndDate < startDate or plannedTaskStartDate > endDate
-			if (tasks[i]->getHasBeenPlanned() && (CUtils::compareDates(tasks[i]->getEndDate(), startDate) == true || CUtils::compareDates(tasks[i]->getStartDate(), endDate) == true))
-
+			// There is no intersection if plannedTaskEndDate < startDate or plannedTaskStartDate > endDate
+			if (tasks[i]->getHasBeenPlanned() && !(CUtils::compareDates_(tasks[i]->getEndDate(), startDate) == true || CUtils::compareDates_(endDate, tasks[i]->getStartDate()) == true))
 				v.push_back(tasks[i]);
 		}
 	}
@@ -190,4 +190,11 @@ void CNode::print()
 
 CNode::~CNode()
 {
+	for (int i = 0; i < childNodes.size(); i++)
+		delete childNodes[i];
+	for (int i = 0; i < tasks.size(); i++)
+		delete tasks[i];
+
+	if (timetable != NULL)
+		delete timetable;
 }

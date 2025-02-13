@@ -1,4 +1,4 @@
-#include "../../include/models/CNotification.h"
+#include "../../include/models/CNotification.hpp"
 
 int CNotification::id = 0;
 

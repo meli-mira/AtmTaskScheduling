@@ -3,8 +3,8 @@
 #include <iostream>
 #include <vector>
 #include <fstream>
-#include "CTask.h"
-#include "CTimetable.h"
+#include "CTask.hpp"
+#include "CTimetable.hpp"
 
 using namespace std;
 class CNode

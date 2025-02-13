@@ -4,8 +4,8 @@
 #include <ctime>
 #include <chrono>
 #include <vector>
-#include "../CUtils.h"
-#include "CResource.h"
+#include "../CUtils.hpp"
+#include "CResource.hpp"
 #include "CNotificationGenerator.hpp"
 
 using namespace std;
@@ -46,6 +46,7 @@ private:
 public:
 	CTask();
 	CTask(int priority, string name, string description, time_t startPoint, time_t endPoint, int duration, TaskType type, string node_id);
+	CTask(string task_id, int priority, string name, string description, time_t startPoint, time_t endPoint, int duration, TaskType type, string node_id);
 
 	string getID() const;
 	string getNodeId() const;

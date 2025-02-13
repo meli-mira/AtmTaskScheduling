@@ -1,6 +1,6 @@
 #include "../../include/controllers/NodeController.hpp"
 #include "../../include/services/TimetableService.hpp"
-#include "../../include/models/CScheduler.h"
+#include "../../include/models/CScheduler.hpp"
 
 void NodeController::getNodes(Context &ctx)
 {
@@ -72,13 +72,16 @@ void NodeController::createNode(Context &ctx)
 {
     auto &req = ctx.getRequest();
     auto &res = ctx.getResponse();
+
+    CNode *node = NULL;
+    auto timetableService = std::make_shared<TimetableService>();
+
     try
     {
         auto json = boost::json::parse(req.body());
-        auto node = NodeSerializer::fromJson(json.as_object());
+        node = NodeSerializer::fromJson(json.as_object());
 
         // Add the timetable created first
-        auto timetableService = std::make_shared<TimetableService>();
         timetableService->addTimetable(node->getTimetable());
 
         nodeService->addNode(node);
@@ -92,6 +95,8 @@ void NodeController::createNode(Context &ctx)
     catch (const exception &e)
     {
         std::cerr << e.what() << endl;
+        if (node != NULL)
+            timetableService->deleteTimetableById(to_string(node->getTimetableId()));
         res.result(http::status::internal_server_error);
         res.set(http::field::server, BOOST_BEAST_VERSION_STRING);
         res.set(http::field::content_type, "application/json");

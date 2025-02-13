@@ -1,7 +1,7 @@
 #pragma once
 
-#include "../../include/models/CTimetable.h"
-#include "../../include/services/Sql.h"
+#include "../../include/models/CTimetable.hpp"
+#include "../../include/services/Sql.hpp"
 #include "../../include/serializers/TimetableSerializer.hpp"
 
 class ITimetableService

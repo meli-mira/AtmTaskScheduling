@@ -1,5 +1,5 @@
 #include "../../include/services/ResourceService.hpp"
-#include "../../include/services/TaskService.h"
+#include "../../include/services/TaskService.hpp"
 
 void ResourceService::init()
 {
@@ -34,6 +34,8 @@ void ResourceService::addResource(const CResource *r)
         connection conn = sql::database_utils::init();
         json json_response = sql::database_utils::exec_sql(conn, sql::INSERT, sql_query);
         sql::database_utils::db_close(conn);
+
+        CLogger::log("ResourceService", "Resource with id " + r->getID() + " has succesfully been added");
     }
     catch (sql::database_exception &e)
     {
@@ -120,6 +122,8 @@ void ResourceService::deleteResourceById(string id)
             sql::database_utils::exec_sql(conn, sql::DELETE_, sql_query1);
         }
         sql::database_utils::db_close(conn);
+
+        CLogger::log("ResourceService", "Resource with id " + id + " has succesfully been deleted");
     }
     catch (sql::database_exception &e)
     {

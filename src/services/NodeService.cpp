@@ -34,6 +34,8 @@ void NodeService::addNode(const CNode *n)
         connection conn = sql::database_utils::init();
         json json_response = sql::database_utils::exec_sql(conn, sql::INSERT, sql_query);
         sql::database_utils::db_close(conn);
+
+        CLogger::log("NodeService", "Node with id " + n->getID() + " has succesfully been added");
     }
     catch (sql::database_exception &e)
     {
@@ -120,6 +122,8 @@ void NodeService::deleteNodeById(string id)
             sql::database_utils::exec_sql(conn, sql::DELETE_, sql_query1);
         }
         sql::database_utils::db_close(conn);
+
+        CLogger::log("NodeService", "Node with id " + id + " has succesfully been deleted");
     }
     catch (sql::database_exception &e)
     {

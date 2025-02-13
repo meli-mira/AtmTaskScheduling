@@ -1,7 +1,7 @@
 #pragma once
 
-#include "../../include/models/CScheduler.h"
-#include "../../include/services/Sql.h"
+#include "../../include/models/CScheduler.hpp"
+#include "../../include/services/Sql.hpp"
 
 class ISchedulerService
 {

@@ -2,8 +2,8 @@
 
 #include <boost/asio.hpp>
 #include <boost/json.hpp>
-#include "../../include/models/CResource.h"
-#include "../../include/CUtils.h"
+#include "../../include/models/CResource.hpp"
+#include "../../include/CUtils.hpp"
 class ResourceSerializer
 {
 public:

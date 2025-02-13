@@ -1,7 +1,7 @@
 #pragma once
 
-#include "../../include/models/CResource.h"
-#include "../../include/services/Sql.h"
+#include "../../include/models/CResource.hpp"
+#include "../../include/services/Sql.hpp"
 
 class IResourceService
 {

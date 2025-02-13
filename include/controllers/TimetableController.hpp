@@ -22,6 +22,5 @@ public:
     void getTimetableById(Context &ctx);
     void getTimetableByNodeId(Context &ctx);
     void getTimetableByResourceId(Context &ctx);
-    //void createTimetable(Context &ctx);
     void updateTimetable(Context &ctx);
 };

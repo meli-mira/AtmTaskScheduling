@@ -1,7 +1,7 @@
 #pragma once
 
-#include "../../include/models/CNotification.h"
-#include "../../include/services/Sql.h"
+#include "../../include/models/CNotification.hpp"
+#include "../../include/services/Sql.hpp"
 
 class INotificationService
 {

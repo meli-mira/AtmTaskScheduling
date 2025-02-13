@@ -77,6 +77,20 @@ public:
             return true;
         return false;
     }
+    static bool compareDates_(time_t date1, time_t date2) // true if date1<date2
+    {
+        struct tm timeinfo1, timeinfo2;
+        localtime_r(&date1, &timeinfo1);
+        localtime_r(&date2, &timeinfo2);
+
+        if (timeinfo1.tm_year < timeinfo2.tm_year)
+            return true;
+        else if (timeinfo1.tm_year == timeinfo2.tm_year && timeinfo1.tm_mon < timeinfo2.tm_mon)
+            return true;
+        else if (timeinfo1.tm_year == timeinfo2.tm_year && timeinfo1.tm_mon == timeinfo2.tm_mon && timeinfo1.tm_mday < timeinfo2.tm_mday)
+            return true;
+        return false;
+    }
 };
 namespace util
 {

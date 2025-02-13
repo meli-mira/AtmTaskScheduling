@@ -1,4 +1,4 @@
-#include "../include/CLogger.h"
+#include "../include/CLogger.hpp"
 
 void CLogger::logger(string logMsg)
 {
@@ -14,4 +14,9 @@ void CLogger::log(string source, string level, string msg, string x_request_id) 
     string json = "Source  " + source + " level " + level + " msg " + msg;
 
     std::clog << json << endl; // thread-safe
+}
+
+void CLogger::log(string source, string msg) noexcept
+{
+    std::clog << "Source " + source + ", message:" + msg << endl;
 }

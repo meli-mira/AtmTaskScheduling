@@ -1,4 +1,4 @@
-#include "../../include/models/CTimetable.h"
+#include "../../include/models/CTimetable.hpp"
 
 int CTimetable::id = 1;
 

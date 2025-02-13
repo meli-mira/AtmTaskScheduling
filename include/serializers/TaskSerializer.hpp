@@ -3,8 +3,8 @@
 #include <boost/asio.hpp>
 #include <boost/json.hpp>
 #include <vector>
-#include "../../include/models/CTask.h"
-#include "../../include/CUtils.h"
+#include "../../include/models/CTask.hpp"
+#include "../../include/CUtils.hpp"
 class TaskSerializer
 {
 public:

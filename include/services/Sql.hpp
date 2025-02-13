@@ -7,7 +7,7 @@
 #include <pqxx/pqxx>
 #include <nlohmann/json.hpp>
 
-#include "../CLogger.h"
+#include "../CLogger.hpp"
 
 using namespace std;
 using namespace pqxx;

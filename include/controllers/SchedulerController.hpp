@@ -21,5 +21,9 @@ public:
     SchedulerController(std::shared_ptr<ISchedulerService> service) : schedulerService(service) {}
     void scheduleNode(Context &ctx);
     void scheduleAllNodesFrom(Context &ctx);
-    //to do, delete scheduler
+    void unscheduleNode(Context &ctx);
+    void unscheduleTaskOfNode(Context &ctx);
+    void getSchedulingReportBetweenFromNode(Context &ctx);
+    void getSchedulingReportBetweenForNode(Context &ctx);
+    void getSchedulingReportBetweenForResource(Context &ctx);
 };

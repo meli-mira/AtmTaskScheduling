@@ -53,6 +53,8 @@ void NotificationService::addNotification(const CNotification *n)
         connection conn = sql::database_utils::init();
         json json_response = sql::database_utils::exec_sql(conn, sql::INSERT, sql_query);
         sql::database_utils::db_close(conn);
+
+        CLogger::log("NotificationService", "Notification with id " + to_string(n->getID()) + " has succesfully been added");
     }
     catch (sql::database_exception &e)
     {
@@ -132,6 +134,7 @@ void NotificationService::deleteNotificationById(string id)
 
         // Delete from existing loaded list of tasks from Scheduling
         // CScheduler::getInstance()->
+        CLogger::log("NotificationService", "Notification with id " + id + " has succesfully been deleted");
     }
     catch (sql::database_exception &e)
     {
@@ -170,6 +173,8 @@ void NotificationService::updateNotification(CNotification *n)
         connection conn = sql::database_utils::init();
         json json_response = sql::database_utils::exec_sql(conn, sql::UPDATE, sql_query);
         sql::database_utils::db_close(conn);
+
+        CLogger::log("NotificationService", "Notification with id " + to_string(n->getID()) + " has succesfully been updated");
     }
     catch (sql::database_exception &e)
     {

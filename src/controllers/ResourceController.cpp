@@ -1,6 +1,6 @@
 #include "../../include/controllers/ResourceController.hpp"
 #include "../../include/services/TimetableService.hpp"
-#include "../../include/models/CScheduler.h"
+#include "../../include/models/CScheduler.hpp"
 
 void ResourceController::getResources(Context &ctx)
 {

@@ -2,8 +2,8 @@
 
 #include <boost/asio.hpp>
 #include <boost/json.hpp>
-#include "../../include/models/CTimetable.h"
-#include "../../include/CUtils.h"
+#include "../../include/models/CTimetable.hpp"
+#include "../../include/CUtils.hpp"
 class TimetableSerializer
 {
 public:

@@ -1,6 +1,14 @@
-#include "../../include/models/CScheduler.h"
+#include "../../include/models/CScheduler.hpp"
 #include "../../include/services/NotificationService.hpp"
 CScheduler *CScheduler::instance = NULL;
+
+CScheduler::~CScheduler()
+{
+	for (int i = 0; i < resources.size(); i++)
+		delete resources[i];
+	for (int i = 0; i < nodes.size(); i++)
+		delete nodes[i];
+}
 
 CScheduler *CScheduler::getInstance()
 {
@@ -59,16 +67,21 @@ void CScheduler::init()
 			/* Get the resources for task */
 			json resources_task = taskService->getResourcesOfTask(task->getID());
 			for (int t = 0; t < resources_task.size(); t++)
-				task->addResource(searchResource(boost::json::parse(to_string(resources_task[t])).as_object().at("resource_id").as_string().c_str()));
-
-			// todo if planned dates
-			if (task->getHasBeenPlanned() == true)
 			{
+				auto r = searchResource(boost::json::parse(to_string(resources_task[t])).as_object().at("resource_id").as_string().c_str());
+				if (task->getHasBeenPlanned() == true)
+					r->addAlocare(task, task->getStartDate(), task->getEndDate());
+
+				task->addResource(r);
 			}
+
 			node->addTask(task);
 		}
-		// to do add parent node
-		// todo add childen nodes
+		// add the node to the parent Node
+		auto parentNode = searchNode(node->getParentNodeID());
+		if (parentNode != NULL) // not the root
+			parentNode->addChildrenNode(node);
+
 		nodes.push_back(node);
 	}
 }
@@ -136,6 +149,11 @@ void CScheduler::printAll()
 
 void CScheduler::addNode(CNode *n)
 {
+	// Add the new node to parent child list
+	auto parentNode = searchNode(n->getParentNodeID());
+	if (parentNode != NULL)
+		parentNode->addChildrenNode(n);
+
 	nodes.push_back(n);
 }
 
@@ -321,47 +339,78 @@ CResource *CScheduler::searchResource(string id)
 	return NULL;
 }
 
-void CScheduler::DFS(CNode *node)
+void CScheduler::DFS(CNode *node, time_t startDate, time_t endDate, vector<unordered_map<string, string, util::string_hash, std::equal_to<>>> &rec)
 {
-	cout << node->getName() << endl;
-	for (int i = 0; i < node->getChildren().size(); i++)
-	{
-		DFS(node->getChildren()[i]);
-	}
-}
-
-string CScheduler::getTasksThatUseResourceBetween(string resourceID, time_t startDate, time_t endDate)
-{
-	string message = "";
-	for (int i = 0; i < nodes.size(); i++)
-	{
-		vector<CTask *> tasks = nodes[i]->getTasksBetween(startDate, endDate);
-		for (int j = 0; j < tasks.size(); j++)
-		{
-			if (tasks[j]->isResourceByIdUsed(resourceID))
-			{
-				message += "Task with id:" + tasks[j]->getID() + " of node with id:" + nodes[i]->getID() +
-						   " is using the resource:" + resourceID + " between:" + CUtils::dateToString(tasks[j]->getStartDate(), "%Y.%m.%d") +
-						   "-" + CUtils::dateToString(tasks[j]->getEndDate(), "%Y.%m.%d") + "\n";
-			}
-		}
-	}
-	return message;
-}
-
-string CScheduler::getTasksBetween(string node_id, time_t startDate, time_t endDate)
-{
-	string message = "";
-	CNode *node = searchNode(node_id);
 	if (node != NULL)
 	{
-		vector<CTask *> tasks = node->getTasksBetween(startDate, endDate);
+		auto tasks = node->getTasksBetween(startDate, endDate);
 		for (int i = 0; i < tasks.size(); i++)
 		{
-			message += "Task with id:" + tasks[i]->getID() + " and priority:" + to_string(tasks[i]->getPriority()) +
-					   " is planned between:" + CUtils::dateToString(tasks[i]->getStartDate(), "%Y.%m.%d") +
-					   "-" + CUtils::dateToString(tasks[i]->getEndDate(), "%Y.%m.%d") + "\n";
+			unordered_map<string, string, util::string_hash, std::equal_to<>> a;
+			a.try_emplace("node_id", node->getID());
+			a.try_emplace("task_id", tasks[i]->getID());
+			a.try_emplace("task_priority", to_string(tasks[i]->getPriority()));
+			a.try_emplace("task_startDate", CUtils::dateToString(tasks[i]->getStartDate(), "%Y.%m.%d"));
+			a.try_emplace("task_endDate", CUtils::dateToString(tasks[i]->getEndDate(), "%Y.%m.%d"));
+			rec.push_back(a);
+		}
+		for (int i = 0; i < node->getChildren().size(); i++)
+		{
+			DFS(node->getChildren()[i], startDate, endDate, rec);
 		}
 	}
-	return message;
+}
+
+string CScheduler::getTasksThatUseResourceBetween(string resource_id, time_t startDate, time_t endDate)
+{
+	CResource *r = searchResource(resource_id);
+	vector<unordered_map<string, string, util::string_hash, std::equal_to<>>> rec;
+	if (r != NULL)
+	{
+		vector<CTask *> tasks = r->getTasksThatUseResourceBetween(startDate, endDate);
+		std::cerr << tasks.size();
+		for (int i = 0; i < tasks.size(); i++)
+		{
+			unordered_map<string, string, util::string_hash, std::equal_to<>> a;
+			a.try_emplace("resource_id", resource_id);
+			a.try_emplace("node_id", tasks[i]->getNodeId());
+			a.try_emplace("task_id", tasks[i]->getID());
+			a.try_emplace("task_priority", to_string(tasks[i]->getPriority()));
+			a.try_emplace("task_startDate", CUtils::dateToString(tasks[i]->getStartDate(), "%Y.%m.%d"));
+			a.try_emplace("task_endDate", CUtils::dateToString(tasks[i]->getEndDate(), "%Y.%m.%d"));
+			rec.push_back(a);
+		}
+	}
+	return json(rec).dump();
+}
+
+string CScheduler::getTasksForNodeBetween(string node_id, time_t startDate, time_t endDate)
+{
+	CNode *node = searchNode(node_id);
+	vector<CTask *> tasks;
+
+	vector<unordered_map<string, string, util::string_hash, std::equal_to<>>> rec;
+	if (node != NULL)
+	{
+		tasks = node->getTasksBetween(startDate, endDate);
+		for (int i = 0; i < tasks.size(); i++)
+		{
+			unordered_map<string, string, util::string_hash, std::equal_to<>> a;
+			a.try_emplace("node_id", node_id);
+			a.try_emplace("task_id", tasks[i]->getID());
+			a.try_emplace("task_priority", to_string(tasks[i]->getPriority()));
+			a.try_emplace("task_startDate", CUtils::dateToString(tasks[i]->getStartDate(), "%Y.%m.%d"));
+			a.try_emplace("task_endDate", CUtils::dateToString(tasks[i]->getEndDate(), "%Y.%m.%d"));
+			rec.push_back(a);
+		}
+	}
+	return json(rec).dump();
+}
+
+string CScheduler::getTasksFromNodeBetween(string node_id, time_t startDate, time_t endDate)
+{
+	CNode *node = searchNode(node_id);
+	vector<unordered_map<string, string, util::string_hash, std::equal_to<>>> rec;
+	DFS(node, startDate, endDate, rec);
+	return json(rec).dump();
 }

@@ -3,8 +3,8 @@
 #include <boost/asio.hpp>
 #include <boost/json.hpp>
 
-#include "../../include/models/CTask.h"
-#include "../../include/services/Sql.h"
+#include "../../include/models/CTask.hpp"
+#include "../../include/services/Sql.hpp"
 
 class ITaskService
 {

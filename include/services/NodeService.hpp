@@ -1,7 +1,7 @@
 #pragma once
 
-#include "../../include/models/CNode.h"
-#include "../../include/services/Sql.h"
+#include "../../include/models/CNode.hpp"
+#include "../../include/services/Sql.hpp"
 
 class INodeService
 {

@@ -1,10 +1,10 @@
 #define _CRT_SECURE_NO_WARNINGS
 #pragma once
-#include "../CUtils.h"
-#include "CNotification.h"
-#include "../CLogger.h"
+#include "../CUtils.hpp"
+#include "CNotification.hpp"
+#include "../CLogger.hpp"
 #include "../services/NodeService.hpp"
-#include "../services/TaskService.h"
+#include "../services/TaskService.hpp"
 #include "../services/ResourceService.hpp"
 #include "../services/TimetableService.hpp"
 #include "../services/SchedulerService.hpp"
@@ -21,7 +21,7 @@ private:
 
 	static CScheduler *instance;
 	CScheduler() {}
-	~CScheduler() {}
+	~CScheduler();
 
 public:
 	static CScheduler *getInstance();
@@ -59,8 +59,9 @@ public:
 	CNode *searchNode(string id);
 	CResource *searchResource(string id);
 
-	void DFS(CNode *Node);
+	void DFS(CNode *Node, time_t startDate, time_t endDate, vector<unordered_map<string, string, util::string_hash, std::equal_to<>>> &rec);
 
-	string getTasksThatUseResourceBetween(string resourceID, time_t startDate, time_t endDate);
-	string getTasksBetween(string node_id, time_t startDate, time_t endDate);
+	string getTasksThatUseResourceBetween(string resource_id, time_t startDate, time_t endDate);
+	string getTasksForNodeBetween(string node_id, time_t startDate, time_t endDate);
+	string getTasksFromNodeBetween(string node_id, time_t startDate, time_t endDate);
 };

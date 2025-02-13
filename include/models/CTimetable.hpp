@@ -1,5 +1,5 @@
 #pragma once
-#include "../CUtils.h"
+#include "../CUtils.hpp"
 #define MAX_CAPACITY 3
 class CTimetable
 {
