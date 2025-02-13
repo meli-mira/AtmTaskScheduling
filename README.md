@@ -36,16 +36,15 @@ Example:
 ```
 ## Available Endpoints
 
-
-*
-```
-  GET /tasks
-```
- get all the tasks
-
- * 0.2
-    * Various bug fixes and optimizations
-    * See [commit change]() or See [release history]()
+* Tasks
+    * GET /tasks : Retrives all the tasks available.
+    * GET /tasks/{node_id} : Retrives all the tasks of node with node_id.
+    * GET /task/{id} : Retrives the details of the task with id.
+    * GET /resources-task/{task_id} : Retrives all the resources of the task with task_id.
+    * POST /task : Creates a new task entity.
+    * POST /resources-task  : Adds a resource to a task.
+    * PUT /task  : Updates a task.
+    * DELETE /task/{id} : Deletes the task with id.
 * 0.1
     * Initial Release
 
