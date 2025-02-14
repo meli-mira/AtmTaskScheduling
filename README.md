@@ -28,7 +28,7 @@ make
 This will generate an executable file in the build directory.
 ## Running the Server
 
-Usage: TaskScheduling <server_address>  <port>  <threads>
+Usage: TaskScheduling <server_address> <port> <threads>
 
 Example:
 ```
