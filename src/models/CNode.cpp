@@ -51,6 +51,11 @@ bool CNode::deleteTask(string task_id)
 	{
 		if (tasks[i]->getID() == task_id)
 		{
+			// If the task has been planned, unschedule
+			if (tasks[i]->getHasBeenPlanned() == true)
+				tasks[i]->unscheduleTask(this->timetable);
+
+			delete tasks[i];
 			tasks.erase(tasks.begin() + i);
 			return true;
 		}
@@ -178,6 +183,22 @@ void CNode::scheduleTasks()
 	}
 }
 
+void CNode::unscheduleTasks()
+{
+	for (int i = 0; i < tasks.size(); i++)
+		tasks[i]->unscheduleTask(this->timetable);
+}
+
+void CNode::unscheduleTasks(time_t startDate, time_t endDate)
+{
+	for (int i = 0; i < tasks.size(); i++)
+	{
+		// There is no intersection if plannedTaskEndDate < startDate or plannedTaskStartDate > endDate
+		if (tasks[i]->getHasBeenPlanned() && !(CUtils::compareDates_(tasks[i]->getEndDate(), startDate) == true || CUtils::compareDates_(endDate, tasks[i]->getStartDate()) == true))
+			tasks[i]->unscheduleTask(this->timetable);
+	}
+}
+
 void CNode::print()
 {
 	cout << "Node:" << name << endl;
@@ -195,6 +216,9 @@ CNode::~CNode()
 	for (int i = 0; i < tasks.size(); i++)
 		delete tasks[i];
 
+	childNodes.clear();
+	tasks.clear();
+	
 	if (timetable != NULL)
 		delete timetable;
 }

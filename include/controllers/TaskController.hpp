@@ -28,4 +28,5 @@ public:
     void addResourceToTask(Context &ctx);
     void deleteTask(Context &ctx);
     void updateTask(Context &ctx);
+    void unscheduleTask(Context &ctx);
 };

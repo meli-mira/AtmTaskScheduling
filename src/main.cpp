@@ -44,6 +44,8 @@ int main(int argc, char *argv[])
 						 { taskController->createTask(ctx); });
 		router->addRoute(PUT, "/task", [taskController](auto &ctx)
 						 { taskController->updateTask(ctx); });
+		router->addRoute(PUT, "/unschedule-task/{task_id}", [taskController](auto &ctx)
+						 { taskController->unscheduleTask(ctx); });
 		router->addRoute(POST, "/resources-task", [taskController](auto &ctx)
 						 { taskController->addResourceToTask(ctx); });
 		router->addRoute(DELETE, "/task/{id}", [taskController](auto &ctx)
@@ -90,6 +92,8 @@ int main(int argc, char *argv[])
 						 { nodeController->getNodesByParentId(ctx); });
 		router->addRoute(POST, "/node", [nodeController](auto &ctx)
 						 { nodeController->createNode(ctx); });
+		router->addRoute(PUT, "/unschedule-node/{node_id}/{startDate}/{endDate}", [nodeController](auto &ctx)
+						 { nodeController->unscheduleNode(ctx); });
 		router->addRoute(DELETE, "/node/{id}", [nodeController](auto &ctx)
 						 { nodeController->deleteNode(ctx); });
 
@@ -122,10 +126,8 @@ int main(int argc, char *argv[])
 
 		std::cout << "Starting server on port " << server.getPort() << endl;
 
-		// start the scheduler instance
+		// Start the scheduler instance
 		CScheduler::getInstance()->init();
-
-		// CScheduler::getInstance()->printAll();
 
 		server.run();
 

@@ -73,6 +73,7 @@ void NotificationController::deleteNotification(Context &ctx)
         string notification_id = ctx.getParam("id").c_str();
         notificationService->deleteNotificationById(notification_id);
 
+        //delete notification from task
         res.result(http::status::no_content);
         res.set(http::field::server, BOOST_BEAST_VERSION_STRING);
     }

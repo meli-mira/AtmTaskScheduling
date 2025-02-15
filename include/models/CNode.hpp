@@ -58,6 +58,9 @@ public:
 	void sortTasksByDeadline();
 
 	void scheduleTasks();
+	void unscheduleTasks();
+	void unscheduleTasks(time_t startDate, time_t endDate);
+	
 	void print();
 
 	~CNode();

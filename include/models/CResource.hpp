@@ -35,7 +35,7 @@ public:
 	static void setID(int last_id);
 	void setTimetable(CTimetable *timetable);
 	void setTheResourceOcupied(class CTask *t, time_t startTime, time_t endTime);
-	void unsetsetTheResourceOcupied(class CTask *t, time_t startTime, time_t endTime);
+	void unsetTheResourceOcupied(time_t startTime, time_t endTime);
 
 	vector<class CTask *> getTasksThatUseResourceBetween(time_t startDate, time_t endDate);
 

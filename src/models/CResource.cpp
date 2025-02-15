@@ -24,6 +24,7 @@ CResource::~CResource()
 {
 	if (timetable != NULL)
 		delete timetable;
+	timetable = NULL;
 }
 
 string CResource::getID() const
@@ -88,13 +89,16 @@ void CResource::setTheResourceOcupied(CTask *t, time_t startTime, time_t endTime
 	alocare.push_back(make_pair(t, make_pair(startTime, endTime)));
 }
 
-void CResource::unsetsetTheResourceOcupied(CTask *t, time_t startTime, time_t endTime)
+void CResource::unsetTheResourceOcupied(time_t startTime, time_t endTime)
 {
 	timetable->unsetOcupied(startTime, endTime);
 	for (int i = 0; i < alocare.size(); i++)
 	{
-		if (alocare[i].first->getID() == t->getID())
+		// There is no intersection if plannedTaskEndDate < startDate or plannedTaskStartDate > endDate
+		if (!(CUtils::compareDates_(alocare[i].second.second, startTime) == true || CUtils::compareDates_(endTime, alocare[i].second.first) == true))
+		{
 			alocare.erase(alocare.begin() + i);
+		}
 	}
 }
 
@@ -116,7 +120,7 @@ vector<CTask *> CResource::getTasksThatUseResourceBetween(time_t startDate, time
 
 void CResource::print()
 {
-	cout << "Resource:" << name << endl;
+	cout << "\t\tResource: " << name << endl;
 	timetable->print();
 	cout << endl;
 }

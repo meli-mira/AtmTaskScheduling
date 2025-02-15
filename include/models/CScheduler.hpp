@@ -43,7 +43,7 @@ public:
 	void addTaskToNode(string node_id, CTask *t);
 	void addResourceToTask(string task_id, string resource_id);
 
-	/* todo Delete elements from loaded structures */
+	/* Delete elements from loaded structures */
 	void deleteNode(string node_id);
 	void deleteTask(string task_id);
 	void deleteResource(string resource_id);
@@ -56,11 +56,18 @@ public:
 	void updateSchedulingStructures(CNode *n);
 	void updateTask(string task_id, vector<pair<string, string>> v);
 
+	/* Unschedule entities */
+	void unscheduleResource(string resource_id, time_t startDate, time_t endDate);
+	void unscheduleTask(string node_id, string task_id);
+	void unscheduleNode(string node_id, time_t startDate, time_t endDate);
+	void unscheduleNode(string node_id);
+
 	CNode *searchNode(string id);
+	CTask *searchTask(string id);
 	CResource *searchResource(string id);
 
+	/* Get scheduling reports */
 	void DFS(CNode *Node, time_t startDate, time_t endDate, vector<unordered_map<string, string, util::string_hash, std::equal_to<>>> &rec);
-
 	string getTasksThatUseResourceBetween(string resource_id, time_t startDate, time_t endDate);
 	string getTasksForNodeBetween(string node_id, time_t startDate, time_t endDate);
 	string getTasksFromNodeBetween(string node_id, time_t startDate, time_t endDate);

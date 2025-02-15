@@ -6,8 +6,10 @@ CScheduler::~CScheduler()
 {
 	for (int i = 0; i < resources.size(); i++)
 		delete resources[i];
+	resources.clear();
 	for (int i = 0; i < nodes.size(); i++)
 		delete nodes[i];
+	nodes.clear();
 }
 
 CScheduler *CScheduler::getInstance()
@@ -99,14 +101,18 @@ void CScheduler::scheduleTasksForNode(CNode *n)
 void CScheduler::printScheduledTasks(CNode *n)
 {
 	vector<CTask *> tasks = n->getTasks();
-	cout << "-----" << tasks.size() << endl;
+	cout << "SCHEDULING PROCESS FOR NODE WITH ID " + n->getID() << std::endl;
+	cout << "Node timetable:" << endl;
+	n->getTimetable()->print();
+	cout << endl;
+
 	cout << "PROCESS\t\tSTART-TIME\tEND-TIME\n";
 	for (int i = 0; i < tasks.size(); i++)
 	{
 		if (tasks[i]->getHasBeenPlanned() == true)
 			tasks[i]->print();
 		else
-			cout << "Task " << tasks[i]->getName() << " can't be planned!! Admin will be notified!" << endl;
+			cout << "\tTask " << tasks[i]->getName() << " can't be planned!! Admin will be notified!" << endl;
 	}
 }
 
@@ -167,6 +173,8 @@ void CScheduler::addTaskToNode(string node_id, CTask *t)
 	CNode *n = searchNode(node_id);
 	if (n != NULL)
 		n->addTask(t);
+	else
+		CLogger::log("CScheduler", "Node with id " + node_id + " doesn't exist. The task could not be associated");
 }
 
 void CScheduler::addResourceToTask(string task_id, string resource_id)
@@ -193,6 +201,17 @@ void CScheduler::deleteNode(string node_id)
 	{
 		if (nodes[i]->getID() == node_id)
 		{
+			auto tasks = nodes[i]->getTasks();
+			for (int i = 0; i < tasks.size(); i++)
+			{
+				// If the task has been planned, unschedule, to set the resources free
+				if (tasks[i]->getHasBeenPlanned() == true)
+					tasks[i]->unscheduleTask(nodes[i]->getTimetable());
+
+				tasks.erase(tasks.begin() + i);
+				delete tasks[i];
+			}
+			delete nodes[i];
 			nodes.erase(nodes.begin() + i);
 			return;
 		}
@@ -204,9 +223,7 @@ void CScheduler::deleteTask(string task_id)
 	for (int i = 0; i < nodes.size(); i++)
 	{
 		if (nodes[i]->deleteTask(task_id))
-		{
 			return;
-		}
 	}
 }
 
@@ -216,6 +233,7 @@ void CScheduler::deleteResource(string resource_id)
 	{
 		if (resources[i]->getID() == resource_id)
 		{
+			delete resources[i];
 			resources.erase(resources.begin() + i);
 			return;
 		}
@@ -319,12 +337,55 @@ void CScheduler::updateTask(string task_id, vector<pair<string, string>> v)
 	}
 }
 
+void CScheduler::unscheduleResource(string resource_id, time_t startDate, time_t endDate)
+{
+	auto r = searchResource(resource_id);
+	if (r != NULL)
+		r->unsetTheResourceOcupied(startDate, endDate);
+}
+
+void CScheduler::unscheduleTask(string node_id, string task_id)
+{
+	auto n = searchNode(node_id);
+	if (n != NULL)
+	{
+		auto task = n->getTask(task_id);
+		if (task != NULL)
+			task->unscheduleTask(n->getTimetable());
+	}
+}
+
+void CScheduler::unscheduleNode(string node_id, time_t startDate, time_t endDate)
+{
+	auto n = searchNode(node_id);
+	if (n != NULL)
+		n->unscheduleTasks(startDate, endDate);
+}
+
+void CScheduler::unscheduleNode(string node_id)
+{
+	auto n = searchNode(node_id);
+	if (n != NULL)
+		n->unscheduleTasks();
+}
+
 CNode *CScheduler::searchNode(string id)
 {
 	for (int i = 0; i < nodes.size(); i++)
 	{
 		if (nodes[i]->getID() == id)
 			return nodes[i];
+	}
+	return NULL;
+}
+
+CTask *CScheduler::searchTask(string id)
+{
+	for (int i = 0; i < nodes.size(); i++)
+	{
+		auto t = nodes[i]->getTask(id);
+		if (t != NULL)
+			return t;
 	}
 	return NULL;
 }

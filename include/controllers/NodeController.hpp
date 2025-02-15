@@ -25,5 +25,6 @@ public:
     void getNodesByParentId(Context& ctx);
     void createNode(Context& ctx);
     void deleteNode(Context& ctx);
+    void unscheduleNode(Context& ctx);
     //todo update
 };

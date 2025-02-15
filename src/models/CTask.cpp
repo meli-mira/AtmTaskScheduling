@@ -43,7 +43,6 @@ int CTask::verifyInterval(CTimetable *nodeTimetable, int nodeCapacity, time_t &s
 				nrPlannedDays = 0; // restart the number planned days
 
 				// 8. if the new endDate misses deadline, generate a RESOURCE_USED notification
-				cout << CUtils::dateToString(startDate, "%d.%m.%Y") << "         " << CUtils::dateToString(endDate, "%d.%m.%Y") << endl;
 				if (CUtils::compareDates(endDate, deadline) == false)
 				{
 					cout << "\nherereee\n";
@@ -58,11 +57,9 @@ int CTask::verifyInterval(CTimetable *nodeTimetable, int nodeCapacity, time_t &s
 			startDate = nodeTimetable->getDateFromIndex(i + 1);
 			endDate = CUtils::addDays(startDate, duration - 1);
 			nrPlannedDays = 0; // restart the number planned days
-			cout << CUtils::dateToString(startDate, "%d.%m.%Y") << "         " << CUtils::dateToString(endDate, "%d.%m.%Y") << endl;
 			// 10. if the new endDate misses deadline, generate a TASK_OVERLAPPING notification
 			if (CUtils::compareDates(endDate, deadline) == false)
 			{
-				cout << "\nhere2\n";
 				this->notification = CNotificationGenerator::generate_TASK_OVERLAPPING_notification(this->node_id, this->task_id, this->startDate, this->endDate);
 				return -1;
 			}
@@ -71,7 +68,6 @@ int CTask::verifyInterval(CTimetable *nodeTimetable, int nodeCapacity, time_t &s
 		// 11. if the endDate misses deadline, generate a TASK_DEADLINE_MISS notification as there are not enough working days
 		if (CUtils::compareDates(endDate, deadline) == false)
 		{
-			cout << CUtils::dateToString(deadline, "%d.%m.%Y") << "         " << CUtils::dateToString(endDate, "%d.%m.%Y") << endl;
 			this->notification = CNotificationGenerator::generate_TASK_DEADLINE_MISS_notification(this->node_id, this->task_id, this->startDate, this->endDate);
 			return -1;
 		}
@@ -336,14 +332,16 @@ int CTask::unscheduleTask(CTimetable *nodeTimetable)
 {
 	if (this->hasBeenPlanned == false)
 		return -1;
-	// unschedule resources used
+
+	// Unschedule resources used
 	for (int i = 0; i < usedResources.size(); i++)
-		usedResources[i]->unsetsetTheResourceOcupied(this, this->startDate, this->endDate);
+		usedResources[i]->unsetTheResourceOcupied(this->startDate, this->endDate);
+		
+	nodeTimetable->unsetOcupied(this->startDate, this->endDate);
 
 	this->hasBeenPlanned = false;
 	this->startDate = 0;
 	this->endDate = 0;
-	nodeTimetable->unsetOcupied(this->startDate, this->endDate);
 
 	return 0;
 }
@@ -373,4 +371,7 @@ void CTask::deleteResource(string resource_id)
 
 CTask::~CTask()
 {
+	if (notification != NULL)
+		delete notification;
+	notification = NULL;
 }

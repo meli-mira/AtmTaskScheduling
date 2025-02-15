@@ -1,5 +1,6 @@
 #include "../../include/controllers/TaskController.hpp"
 #include "../../include/models/CScheduler.hpp"
+#include "../../include/services/TimetableService.hpp"
 
 void TaskController::getTasks(Context &ctx)
 {
@@ -155,9 +156,29 @@ void TaskController::deleteTask(Context &ctx)
         string task_id = ctx.getParam("id").c_str();
         taskService->deleteTaskById(task_id);
 
-        // Delete from existing loaded list of tasks from Scheduling
-        CScheduler::getInstance()->deleteTask(task_id);
+        auto task = CScheduler::getInstance()->searchTask(task_id);
+        if (task != NULL)
+        {
+            // Task's node id
+            auto node = CScheduler::getInstance()->searchNode(task->getNodeId());
 
+            auto hasBeenPlanned = task->getHasBeenPlanned();
+
+            // Task's list of resources
+            auto resources = task->getResources();
+
+            // Delete from existing loaded list of tasks from Scheduling and update timetables of node and used resources
+            CScheduler::getInstance()->deleteTask(task_id);
+
+            // Update scheduling structures if the task has been planned
+            if (hasBeenPlanned)
+            {
+                auto timetableService = std::make_shared<TimetableService>();
+                timetableService->updateTimetable(node->getTimetable());
+                for (int i = 0; i < resources.size(); i++)
+                    timetableService->updateTimetable(resources[i]->getTimetable());
+            }
+        }
         res.result(http::status::no_content);
         res.set(http::field::server, BOOST_BEAST_VERSION_STRING);
     }
@@ -185,7 +206,7 @@ void TaskController::updateTask(Context &ctx)
         if (v.size() > 1)
             CScheduler::getInstance()->updateTask(v[0].second, v);
 
-        res.result(http::status::created);
+        res.result(http::status::ok);
         res.body() = "{\"success\":\"Task updated \"}";
         res.set(http::field::server, BOOST_BEAST_VERSION_STRING);
         res.set(http::field::content_type, "application/json");
@@ -197,5 +218,49 @@ void TaskController::updateTask(Context &ctx)
         res.set(http::field::server, BOOST_BEAST_VERSION_STRING);
         res.set(http::field::content_type, "application/json");
         res.body() = "{\"error\": \"Failed to update task.\"}";
+    }
+}
+
+void TaskController::unscheduleTask(Context &ctx)
+{
+    auto &res = ctx.getResponse();
+    try
+    {
+        auto task = CScheduler::getInstance()->searchTask(ctx.getParam("task_id").c_str());
+        if (task != NULL)
+        {
+            if (task->getHasBeenPlanned())
+            {
+                // Unschedule task from existing loaded list of tasks from Scheduling
+                CScheduler::getInstance()->unscheduleTask(task->getNodeId(), task->getID());
+
+                // Unschedule from DB
+                taskService->unscheduleTask(task->getID());
+
+                // Update timetable of node and used resources and task fields
+                auto timetableService = std::make_shared<TimetableService>();
+
+                timetableService->updateTimetable(CScheduler::getInstance()->searchNode(task->getNodeId())->getTimetable());
+                for (int i = 0; i < task->getResources().size(); i++)
+                    timetableService->updateTimetable(task->getResources()[i]->getTimetable());
+            }
+            res.result(http::status::ok);
+            res.body() = "{\"success\":\" Task has been unscheduled. \"}";
+        }
+        else
+        {
+            res.result(http::status::not_found);
+            res.body() = "{\"failure\":\" Task  has not been unscheduled. Task doesn't exists. \"}";
+        }
+
+        res.set(http::field::server, BOOST_BEAST_VERSION_STRING);
+    }
+    catch (const exception &e)
+    {
+        std::cerr << e.what() << endl;
+        res.result(http::status::internal_server_error);
+        res.set(http::field::server, BOOST_BEAST_VERSION_STRING);
+        res.set(http::field::content_type, "application/json");
+        res.body() = "{\"error\": \"Failed to unschedule task.\"}";
     }
 }

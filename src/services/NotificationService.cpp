@@ -129,7 +129,7 @@ void NotificationService::deleteNotificationById(string id)
         string sql_query = "DELETE FROM notifications WHERE notifications_id = '" + id + "'";
 
         connection conn = sql::database_utils::init();
-        json json_response = sql::database_utils::exec_sql(conn, sql::SELECT, sql_query);
+        sql::database_utils::exec_sql(conn, sql::DELETE_, sql_query);
         sql::database_utils::db_close(conn);
 
         // Delete from existing loaded list of tasks from Scheduling

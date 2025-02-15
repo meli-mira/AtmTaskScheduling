@@ -1,6 +1,7 @@
 #include "../../include/controllers/NodeController.hpp"
 #include "../../include/services/TimetableService.hpp"
 #include "../../include/models/CScheduler.hpp"
+#include "../../include/services/TaskService.hpp"
 
 void NodeController::getNodes(Context &ctx)
 {
@@ -115,7 +116,63 @@ void NodeController::deleteNode(Context &ctx)
         // Delete from existing loaded list of nodes from Scheduling
         CScheduler::getInstance()->deleteNode(node_id);
 
+        // To do, reset resources used, if any
+
         res.result(http::status::no_content);
+        res.set(http::field::server, BOOST_BEAST_VERSION_STRING);
+    }
+    catch (const exception &e)
+    {
+        std::cerr << e.what() << endl;
+        res.result(http::status::internal_server_error);
+        res.set(http::field::server, BOOST_BEAST_VERSION_STRING);
+        res.set(http::field::content_type, "application/json");
+        res.body() = "{\"error\": \"Failed to delete node.\"}";
+    }
+}
+
+void NodeController::unscheduleNode(Context &ctx)
+{
+    auto &res = ctx.getResponse();
+    try
+    {
+        string node_id = ctx.getParam("node_id").c_str();
+        time_t startDate = CUtils::parseDateTime(ctx.getParam("startDate").c_str(), "%Y-%m-%d");
+        time_t endDate = CUtils::parseDateTime(ctx.getParam("endDate").c_str(), "%Y-%m-%d");
+
+        auto node = CScheduler::getInstance()->searchNode(node_id);
+        if (node != NULL)
+        {
+            auto timetableService = std::make_shared<TimetableService>();
+            auto taskService = std::make_shared<TaskService>();
+
+            for (int i = 0; i < node->getTasks().size(); i++)
+            {
+                if (node->getTasks()[i]->getHasBeenPlanned() && !(CUtils::compareDates_(node->getTasks()[i]->getEndDate(), startDate) == true || CUtils::compareDates_(endDate, node->getTasks()[i]->getStartDate()) == true))
+                {
+                    // Unschedule task and task's used resources from loaded structures
+                    node->getTasks()[i]->unscheduleTask(node->getTimetable());
+
+                    // Unschedule task fields from BD
+                    taskService->unscheduleTask(node->getTasks()[i]->getID());
+
+                    // Unschedule task's resources timetables from BD
+                    for (int j = 0; j < node->getTasks()[i]->getResources().size(); j++)
+                        timetableService->updateTimetable(node->getTasks()[i]->getResources()[j]->getTimetable());
+                }
+            }
+            // Update node timetable
+            timetableService->updateTimetable(node->getTimetable());
+
+            res.result(http::status::ok);
+            res.body() = "{\"success\":\" Node's timetable has been unscheduled. \"}";
+        }
+        else
+        {
+            res.result(http::status::not_found);
+            res.body() = "{\"failure\":\" Node's timetable has not been unscheduled. Node doesn't exists. \"}";
+        }
+
         res.set(http::field::server, BOOST_BEAST_VERSION_STRING);
     }
     catch (const exception &e)

@@ -20,6 +20,7 @@ public:
     virtual void deleteTaskById(string id) = 0;
     virtual void updateTask(CTask *t) = 0;
     virtual void updateTask(vector<pair<string, string>> v) = 0;
+    virtual void unscheduleTask(string task_id) = 0;
 };
 
 class TaskService : public ITaskService
@@ -36,4 +37,5 @@ public:
     void deleteTaskById(string id) override;
     void updateTask(CTask *t) override;
     void updateTask(vector<pair<string, string>> v) override;
+    void unscheduleTask(string task_id) override;
 };

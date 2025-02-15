@@ -287,3 +287,32 @@ void TaskService::updateTask(vector<pair<string, string>> v)
         std::cerr << e.what() << '\n';
     }
 }
+
+void TaskService::unscheduleTask(string task_id)
+{
+    try
+    {
+        string sql_query1 = "UPDATE tasks SET ";
+        sql_query1 += " hasbeenplanned = 'false',";
+        sql_query1 += " hasissues = 'false'";
+        sql_query1 += " WHERE task_id = '" + task_id + "'";
+
+        string sql_query2 = "UPDATE scheduling";
+        sql_query2 += " SET startdate = null, enddate = null";
+        sql_query2 += " WHERE task_id = '" + task_id + "'";
+
+        string sql_query3 = "DELETE FROM notifications WHERE task_id = '" + task_id + "'";
+
+        connection conn = sql::database_utils::init();
+        sql::database_utils::exec_sql(conn, sql::UPDATE, sql_query1);
+        sql::database_utils::exec_sql(conn, sql::UPDATE, sql_query2);
+        sql::database_utils::exec_sql(conn, sql::DELETE_, sql_query3);
+        sql::database_utils::db_close(conn);
+
+        CLogger::log("TaskService", "Task with id " + task_id + " has succesfully been unscheduled.");
+    }
+    catch (sql::database_exception &e)
+    {
+        std::cerr << e.what() << '\n';
+    }
+}
