@@ -166,6 +166,8 @@ Example:
 "node_id":"2"
 }
 ```
+![image](https://github.com/user-attachments/assets/36e70744-3f40-4611-98bb-a860d4161f10)
+
 4. 
 5. Add resources to tasks.
 6. Schedule the node tasks.
