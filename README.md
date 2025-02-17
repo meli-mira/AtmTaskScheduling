@@ -179,6 +179,11 @@ Example:
 ![image](https://github.com/user-attachments/assets/b8939729-994e-46db-beb4-3a2c758d961e)
 
 6. Schedule the node tasks. POST /schedule/6 will produce the following result:
+
+<p align="center" width="100%">
+    <img src="https://github.com/user-attachments/assets/1d52e29c-bdac-4f6f-bf09-db5d6f8fb672" alt="Alt Text" style="width:50%; height:auto;">
+</p>
+
 * Task1 will be planned between 08.04.2025 - 14.04.2025 and uses resource1 and resource2
 * Task2 will not be planned as it uses resource1, already used by task1 between 08.04.2025 - 14.04.2025, and there is no enough space between 15.04.2025 - 20.04.2025 to plan it's 5 days. It will be generated a RESOURCE_ALREADY_IN_USE notification.
 * Task3 will be planned between 08.04.2025 - 09.04.2025 (as the node has capacity 2) and it uses resource3.
@@ -187,5 +192,4 @@ Example:
 <p align="center" width="100%">
     <img src="https://github.com/user-attachments/assets/ee51c21d-ffdd-4538-b167-7a60bd6f7cc7" alt="Alt Text" style="width:50%; height:auto;">
 </p>
-
  
