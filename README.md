@@ -168,6 +168,14 @@ Example:
 ```
 ![image](https://github.com/user-attachments/assets/36e70744-3f40-4611-98bb-a860d4161f10)
 
-4. 
-5. Add resources to tasks.
+4. Allocate resources to tasks.
+* In this case, the resources will have the id 10 - resource1, 11 - resource2, 12 - resource3, 13 -  resource4
+```
+{
+"task_id":"13",
+"resource_id":"10",
+}
+```
+![image](https://github.com/user-attachments/assets/b8939729-994e-46db-beb4-3a2c758d961e)
+
 6. Schedule the node tasks.
