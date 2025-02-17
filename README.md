@@ -181,7 +181,7 @@ Example:
 6. Schedule the node tasks. POST /schedule/6 will produce the following result:
 
 <p align="center" width="100%">
-    <img src="https://github.com/user-attachments/assets/1d52e29c-bdac-4f6f-bf09-db5d6f8fb672" alt="Alt Text" style="width:50%; height:auto;">
+    <img src="https://github.com/user-attachments/assets/1d52e29c-bdac-4f6f-bf09-db5d6f8fb672" alt="Alt Text" style="width:30%; height:auto;">
 </p>
 
 * Task1 will be planned between 08.04.2025 - 14.04.2025 and uses resource1 and resource2
