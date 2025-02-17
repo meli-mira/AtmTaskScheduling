@@ -92,7 +92,7 @@ Example:
     * PUT /unschedule-node/{node_id}/{startDate}/{endDate} : Unschedule the node by node_id between startDate and endDate.
     * DELETE /node/{id} : Deletes a node entity by id.
     * 
-* Example of json for POST /resource
+* Example of json for POST /node
   
 ```
 {
@@ -119,6 +119,44 @@ Example:
 ## Usage example
 
 1. Create the node "test_node".
+```
+{
+"name":"test_node",
+"capacity":"2",
+"minpriority":"10",
+"maxpriority":"20",
+"parent_node_id":"1"
+}
+```
+* The field capacity establish how many tasks can run in parallel in the specified node. In this example, the node would be able to run 2 tasks in pararel.
+
 2. Add tasks to the created node.
-3. Add resources to tasks.
-4. Schedule the node tasks.
+
+* There will be added 4 tasks. All 4 tasks have the request date: 08-04-2025 and the deadline: 20-04-2025. Moreover, for simplicity, the tasks will have the same priority and will be INTERVAL_BASED. 
+* Task1:
+     * Duration: 5 days
+     * Resources used : resource1, resource2
+* Task2:
+     * Duration: 5 days
+     * Resources used : resource1, resource3
+* Task3:
+     * Duration: 2 days
+     * Resource used: resource3
+* Task4:
+     * Duration: 7 days
+     * No resource used
+```
+{
+"name":"task1",
+"description":"task_description",
+"request":"2025-04-08",
+"deadline":"2025-04-20",
+"duration":"5",
+"priority":"12",
+"tasktype":"INTERVAL_BASED",
+"node_id":"2"
+}
+```
+4. 
+5. Add resources to tasks.
+6. Schedule the node tasks.
