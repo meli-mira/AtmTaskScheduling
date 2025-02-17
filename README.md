@@ -44,6 +44,7 @@ Example:
     * POST /task : Creates a new task entity.
     * POST /resources-task  : Adds a resource to a task.
     * PUT /task  : Updates a task entity.
+    * PUT /unschedule-task/{task_id} : Unschedule the task with task_id, unscheduling the allocated resources and the associated node.
     * DELETE /task/{id} : Deletes a task entity by id.
       
 * Example of json for POST /task
@@ -88,8 +89,9 @@ Example:
     * GET /node/{id} : Retrives a node entity by id.
     * GET /nodes/{parent_id} : Retrives all the child nodes of the parent node with parent_id.
     * POST /node : Creates a new node entity.
+    * PUT /unschedule-node/{node_id}/{startDate}/{endDate} : Unschedule the node by node_id between startDate and endDate.
     * DELETE /node/{id} : Deletes a node entity by id.
-
+    * 
 * Example of json for POST /resource
   
 ```
