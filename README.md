@@ -129,10 +129,19 @@ Example:
 }
 ```
 * The field capacity establish how many tasks can run in parallel in the specified node. In this example, the node would be able to run 2 tasks in pararel.
+  
+2. Create resources
+   
+* 4 resources will be added. For simplicity, each resource will have the capacity 1 (meaning it can be used only once in a time slot).
+```
+{
+"name":"resource1",
+"capacity":"1"
+}
+```
+3. Add tasks to the created node.
 
-2. Add tasks to the created node.
-
-* There will be added 4 tasks. All 4 tasks have the request date: 08-04-2025 and the deadline: 20-04-2025. Moreover, for simplicity, the tasks will have the same priority and will be INTERVAL_BASED. 
+* 4 task will be added. All 4 tasks have the request date: 08-04-2025 and the deadline: 20-04-2025. Moreover, for simplicity, the tasks will have the same priority and will be INTERVAL_BASED. 
 * Task1:
      * Duration: 5 days
      * Resources used : resource1, resource2
