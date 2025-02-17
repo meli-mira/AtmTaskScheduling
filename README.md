@@ -115,3 +115,10 @@ Example:
   * GET /notifications-node/{node_id} : Retrives all the notification entities of a node with node_id.
   * GET /notifications-task/{task_id} : Retrives all the notification entities of a task with task_id.
   * DELETE /notification/{id} : Deletes a notification entity by id.
+
+## Usage example
+
+1. Create the node "test_node".
+2. Add tasks to the created node.
+3. Add resources to tasks.
+4. Schedule the node tasks.
