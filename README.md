@@ -184,7 +184,8 @@ Example:
 * Task3 will be planned between 08.04.2025 - 09.04.2025 (as the node has capacity 2) and it uses resource3.
 * Task4 will be planned between 10.04.2025 - 18.04.2025.
 
-<div style="text-align:center"><img src="https://github.com/user-attachments/assets/ee51c21d-ffdd-4538-b167-7a60bd6f7cc7" alt="Alt Text" style="width:50%; height:auto;"></div>
-
+<p align="center" width="100%">
+    <img src="https://github.com/user-attachments/assets/ee51c21d-ffdd-4538-b167-7a60bd6f7cc7" alt="Alt Text" style="width:50%; height:auto;">
+</p>
 
  
