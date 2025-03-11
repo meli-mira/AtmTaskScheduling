@@ -23,7 +23,7 @@ int main(int argc, char *argv[])
 		}
 
 		auto router = std::make_shared<Router>();
-		auto server = Server(6969, router);
+		auto server = Server(atoi(argv[2]), router);
 
 		router->setPrefix("/v1");
 
