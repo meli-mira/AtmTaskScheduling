@@ -17,14 +17,24 @@ CTask *TaskSerializer::fromJson(const boost::json::object &obj)
     if (obj.if_contains("task_id"))
     {
         if (taskType == "INTERVAL_BASED")
-            t = new CTask(obj.at("task_id").as_string().c_str(), priority, name, description, CUtils::parseDateTime(request.c_str(), "%Y-%m-%d"), CUtils::parseDateTime(deadline.c_str(), "%Y-%m-%d"), duration, INTERVAL_BASED, node_id);
+        {
+            if (obj.if_contains("tasksubtype"))
+                t = new CTask(obj.at("task_id").as_string().c_str(), priority, name, description, CUtils::parseDateTime(request.c_str(), "%Y-%m-%d"), CUtils::parseDateTime(deadline.c_str(), "%Y-%m-%d"), duration, INTERVAL_BASED, obj.at("tasksubtype").as_string().c_str(), node_id);
+            else
+                t = new CTask(obj.at("task_id").as_string().c_str(), priority, name, description, CUtils::parseDateTime(request.c_str(), "%Y-%m-%d"), CUtils::parseDateTime(deadline.c_str(), "%Y-%m-%d"), duration, INTERVAL_BASED, node_id);
+        }
         else
             t = new CTask(obj.at("task_id").as_string().c_str(), priority, name, description, CUtils::parseDateTime(request.c_str(), "%Y-%m-%d"), CUtils::parseDateTime(deadline.c_str(), "%Y-%m-%d"), duration, FIXED, node_id);
     }
     else
     {
         if (taskType == "INTERVAL_BASED")
-            t = new CTask(priority, name, description, CUtils::parseDateTime(request.c_str(), "%Y-%m-%d"), CUtils::parseDateTime(deadline.c_str(), "%Y-%m-%d"), duration, INTERVAL_BASED, node_id);
+        {
+            if (obj.if_contains("tasksubtype"))
+                t = new CTask(priority, name, description, CUtils::parseDateTime(request.c_str(), "%Y-%m-%d"), CUtils::parseDateTime(deadline.c_str(), "%Y-%m-%d"), duration, INTERVAL_BASED, obj.at("tasksubtype").as_string().c_str(), node_id);
+            else
+                t = new CTask(priority, name, description, CUtils::parseDateTime(request.c_str(), "%Y-%m-%d"), CUtils::parseDateTime(deadline.c_str(), "%Y-%m-%d"), duration, INTERVAL_BASED, node_id);
+        }
         else
             t = new CTask(priority, name, description, CUtils::parseDateTime(request.c_str(), "%Y-%m-%d"), CUtils::parseDateTime(deadline.c_str(), "%Y-%m-%d"), duration, FIXED, node_id);
     }

@@ -31,9 +31,3 @@ CNotification *CNotificationGenerator::generate_TASK_OVERLAPPING_notification(st
 
     return new CNotification(node_id, task_id, description, TASK_OVERLAPPING);
 }
-
-CNotification * CNotificationGenerator::generate_notification(string node_id, string task_id, time_t startDate, time_t endDate)
-{
-  
-    
-}

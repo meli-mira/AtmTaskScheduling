@@ -2,6 +2,7 @@
 #pragma once
 #include "../CUtils.hpp"
 #include "CNotification.hpp"
+#include "CResourceAllocator.hpp"
 #include "../CLogger.hpp"
 #include "../services/NodeService.hpp"
 #include "../services/TaskService.hpp"
@@ -11,6 +12,7 @@
 #include "../serializers/ResourceSerializer.hpp"
 #include "../serializers/NodeSerializer.hpp"
 #include "../serializers/TaskSerializer.hpp"
+
 using namespace std;
 
 class CScheduler
@@ -42,6 +44,7 @@ public:
 	void addResource(CResource *r);
 	void addTaskToNode(string node_id, CTask *t);
 	void addResourceToTask(string task_id, string resource_id);
+	void addResourcesToTask(CTask*t, vector<string> resources);
 
 	/* Delete elements from loaded structures */
 	void deleteNode(string node_id);
@@ -65,6 +68,7 @@ public:
 	CNode *searchNode(string id);
 	CTask *searchTask(string id);
 	CResource *searchResource(string id);
+	CResource *searchResourceByType(string resource_type);
 
 	/* Get scheduling reports */
 	void DFS(CNode *Node, time_t startDate, time_t endDate, vector<unordered_map<string, string, util::string_hash, std::equal_to<>>> &rec);

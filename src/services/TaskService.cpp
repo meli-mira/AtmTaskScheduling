@@ -24,36 +24,44 @@ void TaskService::init()
 
 void TaskService::addTask(const CTask *t)
 {
-    string sql_query;
-
-    // Insert an entry into scheduling
-    string sql_query2 = "INSERT INTO scheduling(node_id, task_id)";
-    sql_query2 += " VALUES ('" + t->getNodeId() + "','" + t->getID() + "')";
-
-    if (t->getTaskType() == INTERVAL_BASED)
-    {
-        sql_query = "INSERT INTO tasks(task_id, name, description, priority, request, deadline, duration, hasissues, hasbeenplanned, tasktype, node_id)";
-        sql_query += "VALUES ('" + t->getID() + "','" + t->getName() + "','" +
-                     t->getDescription() + "'," + to_string(t->getPriority()) + ",'" +
-                     CUtils::dateToString(t->getStartNoEarlierThan(), "%Y-%m-%d") + "','" +
-                     CUtils::dateToString(t->getDeadline(), "%Y-%m-%d") + "'," + to_string(t->getDuration()) +
-                     "," + "'false'," + "'false'," + "'INTERVAL_BASED'," + "'" + t->getNodeId() + "')";
-    }
-    else
-    {
-        sql_query = "INSERT INTO tasks(task_id, name, description, priority, request, deadline, duration, hasissues, hasbeenplanned, tasktype, node_id)";
-        sql_query += "VALUES ('" + t->getID() + "','" + t->getName() + "','" +
-                     t->getDescription() + "'," + to_string(t->getPriority()) + ",'" +
-                     CUtils::dateToString(t->getStartNoEarlierThan(), "%Y-%m-%d") + "','" +
-                     CUtils::dateToString(t->getDeadline(), "%Y-%m-%d") + "'," + to_string(t->getDuration()) +
-                     "," + "'false'," + "'false'," + "'FIXED'," + "'" + t->getNodeId() + "')";
-    }
     try
     {
+        string sql_query;
+
+        // Insert an entry into scheduling
+        string sql_query2 = "INSERT INTO scheduling(node_id, task_id)";
+        sql_query2 += " VALUES ('" + t->getNodeId() + "','" + t->getID() + "')";
+
+        if (t->getTaskType() == INTERVAL_BASED)
+        {
+            sql_query = "INSERT INTO tasks(task_id, name, description, priority, request, deadline, duration, hasissues, hasbeenplanned, tasktype, node_id, tasksubtype)";
+            sql_query += "VALUES ('" + t->getID() + "','" + t->getName() + "','" +
+                         t->getDescription() + "'," + to_string(t->getPriority()) + ",'" +
+                         CUtils::dateToString(t->getStartNoEarlierThan(), "%Y-%m-%d") + "','" +
+                         CUtils::dateToString(t->getDeadline(), "%Y-%m-%d") + "'," + to_string(t->getDuration()) +
+                         "," + "'false'," + "'false'," + "'INTERVAL_BASED'," + "'" + t->getNodeId() + "','" + t->getTaskSubTypeAsString() + "')";
+        }
+        else
+        {
+            sql_query = "INSERT INTO tasks(task_id, name, description, priority, request, deadline, duration, hasissues, hasbeenplanned, tasktype, node_id, tasksubtype)";
+            sql_query += "VALUES ('" + t->getID() + "','" + t->getName() + "','" +
+                         t->getDescription() + "'," + to_string(t->getPriority()) + ",'" +
+                         CUtils::dateToString(t->getStartNoEarlierThan(), "%Y-%m-%d") + "','" +
+                         CUtils::dateToString(t->getDeadline(), "%Y-%m-%d") + "'," + to_string(t->getDuration()) +
+                         "," + "'false'," + "'false'," + "'FIXED'," + "'" + t->getNodeId() + "','" + t->getTaskSubTypeAsString() + "')";
+        }
+
         connection conn = sql::database_utils::init();
         sql::database_utils::exec_sql(conn, sql::INSERT, sql_query);
         sql::database_utils::exec_sql(conn, sql::INSERT, sql_query2);
         sql::database_utils::db_close(conn);
+
+        if (t->getTaskSubtype() != TYPE_NULL)
+        {
+            auto resources = t->getResources();
+            for (int i = 0; i < resources.size(); i++)
+                this->addResourceToTask(t->getID(), resources[i]->getID());
+        }
 
         CLogger::log("TaskService", "Task with id " + t->getID() + " has succesfully been added");
     }

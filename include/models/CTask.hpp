@@ -16,6 +16,21 @@ typedef enum TaskType
 	INTERVAL_BASED
 } TaskType;
 
+typedef enum TaskSubtype
+{
+	TYPE_NULL,
+	TYPE1,
+	TYPE2,
+	TYPE3,
+	TYPE4,
+	TYPE5,
+	TYPE6,
+	TYPE7,
+	TYPE8,
+	TYPE9,
+	TYPE10
+} TaskSubtype;
+
 class CTask
 {
 private:
@@ -37,6 +52,7 @@ private:
 
 	vector<CResource *> usedResources;
 	TaskType taskType;
+	TaskSubtype taskSubType;
 
 	string node_id;
 	CNotification *notification;
@@ -46,7 +62,9 @@ private:
 public:
 	CTask();
 	CTask(int priority, string name, string description, time_t startPoint, time_t endPoint, int duration, TaskType type, string node_id);
+	CTask(int priority, string name, string description, time_t startPoint, time_t endPoint, int duration, TaskType type,string taskSubType, string node_id);
 	CTask(string task_id, int priority, string name, string description, time_t startPoint, time_t endPoint, int duration, TaskType type, string node_id);
+	CTask(string task_id, int priority, string name, string description, time_t startPoint, time_t endPoint, int duration, TaskType type, string taskSubType, string node_id);
 
 	string getID() const;
 	string getNodeId() const;
@@ -66,6 +84,8 @@ public:
 	bool getIsIntervalBased() const;
 	bool isResourceByIdUsed(string resource_id);
 	TaskType getTaskType() const;
+	TaskSubtype getTaskSubtype() const;
+	string getTaskSubTypeAsString() const;
 	vector<CResource *> getResources() const;
 
 	void setTaskID(string task_id);

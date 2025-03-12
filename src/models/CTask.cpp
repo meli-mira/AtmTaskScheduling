@@ -88,6 +88,48 @@ CTask::CTask(int priority, string name, string description, time_t startPoint, t
 	this->hasBeenPlanned = false;
 	this->hasIssues = false;
 	this->taskType = type;
+	this->taskSubType = TYPE_NULL;
+
+	this->task_id = to_string(id);
+	id++;
+
+	this->startNoEarlierThan = startPoint;
+	this->deadline = endPoint;
+
+	this->node_id = node_id;
+	this->notification = NULL;
+}
+
+CTask::CTask(int priority, string name, string description, time_t startPoint, time_t endPoint, int duration, TaskType type, string taskSubType, string node_id)
+{
+	this->priority = priority;
+	this->name = name;
+	this->description = description;
+	this->duration = duration;
+
+	this->hasBeenPlanned = false;
+	this->hasIssues = false;
+	this->taskType = type;
+	if (taskSubType == "TYPE1")
+		this->taskSubType = TYPE1;
+	else if (taskSubType == "TYPE2")
+		this->taskSubType = TYPE2;
+	else if (taskSubType == "TYPE3")
+		this->taskSubType = TYPE3;
+	else if (taskSubType == "TYPE4")
+		this->taskSubType = TYPE4;
+	else if (taskSubType == "TYPE5")
+		this->taskSubType = TYPE5;
+	else if (taskSubType == "TYPE6")
+		this->taskSubType = TYPE6;
+	else if (taskSubType == "TYPE7")
+		this->taskSubType = TYPE7;
+	else if (taskSubType == "TYPE8")
+		this->taskSubType = TYPE8;
+	else if (taskSubType == "TYPE9")
+		this->taskSubType = TYPE9;
+	else if (taskSubType == "TYPE10")
+		this->taskSubType = TYPE10;
 
 	this->task_id = to_string(id);
 	id++;
@@ -109,6 +151,47 @@ CTask::CTask(string task_id, int priority, string name, string description, time
 	this->hasBeenPlanned = false;
 	this->hasIssues = false;
 	this->taskType = type;
+	this->taskSubType = TYPE_NULL;
+
+	this->task_id = task_id;
+
+	this->startNoEarlierThan = startPoint;
+	this->deadline = endPoint;
+
+	this->node_id = node_id;
+	this->notification = NULL;
+}
+
+CTask::CTask(string task_id, int priority, string name, string description, time_t startPoint, time_t endPoint, int duration, TaskType type, string taskSubType, string node_id)
+{
+	this->priority = priority;
+	this->name = name;
+	this->description = description;
+	this->duration = duration;
+
+	this->hasBeenPlanned = false;
+	this->hasIssues = false;
+	this->taskType = type;
+	if (taskSubType == "TYPE1")
+		this->taskSubType = TYPE1;
+	else if (taskSubType == "TYPE2")
+		this->taskSubType = TYPE2;
+	else if (taskSubType == "TYPE3")
+		this->taskSubType = TYPE3;
+	else if (taskSubType == "TYPE4")
+		this->taskSubType = TYPE4;
+	else if (taskSubType == "TYPE5")
+		this->taskSubType = TYPE5;
+	else if (taskSubType == "TYPE6")
+		this->taskSubType = TYPE6;
+	else if (taskSubType == "TYPE7")
+		this->taskSubType = TYPE7;
+	else if (taskSubType == "TYPE8")
+		this->taskSubType = TYPE8;
+	else if (taskSubType == "TYPE9")
+		this->taskSubType = TYPE9;
+	else if (taskSubType == "TYPE10")
+		this->taskSubType = TYPE10;
 
 	this->task_id = task_id;
 
@@ -205,6 +288,37 @@ bool CTask::isResourceByIdUsed(string resource_id)
 TaskType CTask::getTaskType() const
 {
 	return this->taskType;
+}
+
+TaskSubtype CTask::getTaskSubtype() const
+{
+	return this->taskSubType;
+}
+
+string CTask::getTaskSubTypeAsString() const
+{
+	if (this->taskSubType == TYPE1)
+		return "TYPE1";
+	else if (this->taskSubType == TYPE2)
+		return "TYPE2";
+	else if (this->taskSubType == TYPE3)
+		return "TYPE3";
+	else if (this->taskSubType == TYPE4)
+		return "TYPE4";
+	else if (this->taskSubType == TYPE5)
+		return "TYPE5";
+	else if (this->taskSubType == TYPE6)
+		return "TYPE6";
+	else if (this->taskSubType == TYPE7)
+		return "TYPE7";
+	else if (this->taskSubType == TYPE8)
+		return "TYPE8";
+	else if (this->taskSubType == TYPE9)
+		return "TYPE9";
+	else if (this->taskSubType == TYPE10)
+		return "TYPE10";
+	else
+		return "TYPE_NULL";
 }
 
 vector<CResource *> CTask::getResources() const
@@ -336,7 +450,7 @@ int CTask::unscheduleTask(CTimetable *nodeTimetable)
 	// Unschedule resources used
 	for (int i = 0; i < usedResources.size(); i++)
 		usedResources[i]->unsetTheResourceOcupied(this->startDate, this->endDate);
-		
+
 	nodeTimetable->unsetOcupied(this->startDate, this->endDate);
 
 	this->hasBeenPlanned = false;

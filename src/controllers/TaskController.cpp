@@ -1,6 +1,7 @@
 #include "../../include/controllers/TaskController.hpp"
 #include "../../include/models/CScheduler.hpp"
 #include "../../include/services/TimetableService.hpp"
+#include "../../include/models/CResourceAllocator.hpp"
 
 void TaskController::getTasks(Context &ctx)
 {
@@ -97,12 +98,33 @@ void TaskController::createTask(Context &ctx)
     try
     {
         auto json = boost::json::parse(req.body());
+       
         auto task = TaskSerializer::fromJson(json.as_object());
+        
+        if (task->getTaskSubtype() != TYPE_NULL)
+        {
+            CResourceAllocator::allocateResources(task);
+        }
 
         taskService->addTask(task);
 
         /* Add task to loaded structures */
         CScheduler::getInstance()->addTaskToNode(task->getNodeId(), task);
+
+        /* Schedule after adding task */
+        auto node = CScheduler::getInstance()->searchNode(task->getNodeId());
+        cout << "here2";
+        if (node != NULL)
+        {
+            /* Schedule tasks for node with given node_id */
+            CScheduler::getInstance()->scheduleTasksForNode(node);
+            CScheduler::getInstance()->printScheduledTasks(node);
+
+            /* Update scheduling structures for scheduled tasks and resources */
+            CScheduler::getInstance()->updateSchedulingStructures(node);
+
+            CLogger::log("TaskController", "Scheduling for node with id " + task->getNodeId() + " has been done");
+        }
 
         res.result(http::status::created);
         res.body() = "{\"success\":\"Task created. Scheduler added. \"}";

@@ -86,6 +86,9 @@ void CScheduler::init()
 
 		nodes.push_back(node);
 	}
+
+	// init the resources for task_type from file in folder config
+	CResourceAllocator::init();
 }
 
 void CScheduler::scheduleAll(CNode *n)
@@ -192,6 +195,18 @@ void CScheduler::addResourceToTask(string task_id, string resource_id)
 				break;
 			}
 		}
+	}
+}
+
+void CScheduler::addResourcesToTask(CTask *t, vector<string> resources)
+{
+	CResource *r;
+	for (int i = 0; i < resources.size(); i++)
+	{
+		cout << resources[i] << " ";
+		r = this->searchResourceByType(resources[i]);
+		if (r != NULL)
+			t->addResource(r);
 	}
 }
 
@@ -395,6 +410,16 @@ CResource *CScheduler::searchResource(string id)
 	for (int i = 0; i < resources.size(); i++)
 	{
 		if (resources[i]->getID() == id)
+			return resources[i];
+	}
+	return NULL;
+}
+
+CResource *CScheduler::searchResourceByType(string resource_type)
+{
+	for (int i = 0; i < resources.size(); i++)
+	{
+		if (resources[i]->getName() == resource_type)
 			return resources[i];
 	}
 	return NULL;

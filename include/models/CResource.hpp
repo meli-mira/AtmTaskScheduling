@@ -1,6 +1,7 @@
 #pragma once
 #include "../CUtils.hpp"
 #include "CTimetable.hpp"
+
 class CResource
 {
 private:
