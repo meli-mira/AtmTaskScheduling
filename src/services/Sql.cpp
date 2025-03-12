@@ -5,7 +5,7 @@ namespace sql
     const char *LOGGER_SRC{"sql"};
     string DATABASE_NAME = "ppa";
     string DATABASE_USER = "postgres";
-    string DATABASE_USER_PASS = "1234";
+    string DATABASE_USER_PASS = "postgres";
     string HOST_ADDRESS = "127.0.0.1";
     string HOST_PORT = "5432";
     void database_utils::db_exeq_sql(connection &conn, const std::string sql)

@@ -1,0 +1,14 @@
+<configuration>
+    <input>
+        <net-file value="bucharest.net.xml"/>
+        <route-files value="bucharest.rou.xml"/>
+    </input>
+    <output>
+        <tripinfo-output value="output.xml"/>
+    </output>
+    <time>
+        <begin>0</begin>
+        <end>3600</end>  <!-- Run for 10 minutes -->
+    </time>
+
+</configuration>

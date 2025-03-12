@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!-- Generated on 2025-03-08 with increased traffic load -->
+
+<routes xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="http://sumo.dlr.de/xsd/routes_file.xsd">
+
+    <!-- Vehicle Types -->
+    <vType id="passenger" length="5.00" minGap="2.50" maxSpeed="27.78" guiShape="passenger" accel="1.0" decel="5.0" sigma="0.5"/>
+    <vType id="taxi" length="4.50" minGap="2.50" maxSpeed="30.00" guiShape="passenger" accel="1.2" decel="5.0" sigma="0.5"/>
+    <vType id="bus" length="12.00" minGap="3.00" maxSpeed="20.00" guiShape="bus" accel="0.8" decel="4.0" sigma="0.5"/>
+    
+    <!-- Passenger Cars -->
+    <vehicle id="veh_1" type="passenger" depart="0.00">
+        <route edges="14134430#0 14134430#1 241211914#0 241211914#1"/>
+    </vehicle>
+    <vehicle id="veh_2" type="passenger" depart="5.00">
+        <route edges="153967343#1 153967343#3"/>
+    </vehicle>
+    <vehicle id="veh_5" type="passenger" depart="20.00">
+        <route edges="204909977#0 4045771#0"/>
+    </vehicle>
+    <vehicle id="veh_6" type="passenger" depart="25.00">
+        <route edges="14134430#0 14134430#1 241211914#0 241211914#1"/>
+    </vehicle>
+    <vehicle id="veh_10" type="passenger" depart="45.00">
+        <route edges="204909977#0 4045771#0"/>
+    </vehicle>
+    
+    <!-- More Passenger Cars for Traffic Density -->
+    <vehicle id="veh_11" type="passenger" depart="50.00">
+        <route edges="153967343#1 153967343#3"/>
+    </vehicle>
+    <vehicle id="veh_12" type="passenger" depart="55.00">
+        <route edges="228997079#0 228997079#1 241211787#0 241211787#1"/>
+    </vehicle>
+    <vehicle id="veh_13" type="passenger" depart="60.00">
+        <route edges="14134430#0 14134430#1 241211914#0 241211914#1"/>
+    </vehicle>
+    <vehicle id="veh_14" type="passenger" depart="65.00">
+        <route edges="204909977#0 4045771#0"/>
+    </vehicle>
+
+    <!-- Taxis -->
+    <vehicle id="veh_3" type="taxi" depart="10.00">
+        <route edges="228997079#0 228997079#1 241211787#0 241211787#1"/>
+    </vehicle>
+    <vehicle id="veh_7" type="taxi" depart="30.00">
+        <route edges="153967343#1 153967343#3"/>
+    </vehicle>
+    <vehicle id="veh_15" type="taxi" depart="70.00">
+        <route edges="14134430#0 14134430#1 241211914#0 241211914#1"/>
+    </vehicle>
+    <vehicle id="veh_16" type="taxi" depart="75.00">
+        <route edges="228997079#0 228997079#1 241211787#0 241211787#1"/>
+    </vehicle>
+
+    <!-- Buses -->
+    <vehicle id="veh_8" type="bus" depart="35.00">
+        <route edges="228997079#0 228997079#1 241211787#0 241211787#1"/>
+    </vehicle>
+    <vehicle id="veh_17" type="bus" depart="80.00">
+        <route edges="153967343#1 153967343#3"/>
+    </vehicle>
+    <vehicle id="veh_18" type="bus" depart="85.00">
+        <route edges="204909977#0 4045771#0"/>
+    </vehicle>
+    
+</routes>

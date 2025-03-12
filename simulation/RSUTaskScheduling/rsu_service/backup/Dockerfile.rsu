@@ -1,0 +1,50 @@
+FROM ubuntu:latest
+
+# Set the working directory
+WORKDIR /app
+
+# Update package lists and install dependencies
+RUN apt update && apt install -y \
+    libpqxx-dev \
+    cmake \
+    g++ \
+    libboost-all-dev \
+    postgresql \
+    postgresql-contrib
+
+# Set PostgreSQL environment variables
+ENV POSTGRES_DB=ppa
+ENV POSTGRES_USER=postgres
+ENV POSTGRES_PASSWORD=postgress
+
+# Copy database initialization script before starting PostgreSQL
+COPY init_db.sql /docker-entrypoint-initdb.d/init_db.sql
+
+# Initialize PostgreSQL data directory
+RUN mkdir -p /var/lib/postgresql/data && chown -R postgres:postgres /var/lib/postgresql
+
+# Switch to PostgreSQL user
+USER postgres
+
+# Initialize PostgreSQL and create the database
+RUN /usr/lib/postgresql/16/bin/initdb -D /var/lib/postgresql/data && \
+    /usr/lib/postgresql/16/bin/pg_ctl -D /var/lib/postgresql/data -l /var/lib/postgresql/logfile start && \
+    psql -c "CREATE DATABASE ppa;" && \
+    psql -d ppa -f /docker-entrypoint-initdb.d/init_db.sql && \
+    /usr/lib/postgresql/16/bin/pg_ctl -D /var/lib/postgresql/data stop
+
+# Switch back to root user
+USER root
+
+# Copy the compiled TaskScheduling executable
+COPY TaskScheduling /app/TaskScheduling
+
+# Make TaskScheduling executable
+RUN chmod +x /app/TaskScheduling
+
+# Expose the API port
+EXPOSE 8080
+
+# Start PostgreSQL and run TaskScheduling
+CMD su - postgres -c "/usr/lib/postgresql/16/bin/pg_ctl -D /var/lib/postgresql/data start" && \
+    /app/TaskScheduling "0.0.0.0" "8080" "1"
